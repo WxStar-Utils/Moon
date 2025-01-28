@@ -17,7 +17,6 @@ public class Config
     [XmlElement] public bool UseNationalLocations { get; set; } = false;
     [XmlElement] public int CheckAlertTimeSeconds { get; set; } = 600;      // Defaults to 10 minutes
     
-    [XmlElement] public NetworkConfig UnitConfig { get; set; } = new NetworkConfig();
     [XmlElement("RadarConfig")] public RadarConfig RadarConfiguration { get; set; } = new RadarConfig();
     [XmlElement("DataConfig")] public DataEndpointConfig DataConfig { get; set; } = new DataEndpointConfig();
 
@@ -67,15 +66,7 @@ public class Config
         
     }
 
-    [XmlRoot("UnitConfig")]
-    public class NetworkConfig
-    {
-        [XmlElement] public int RoutineMsgPort { get; set; } = 7787;
-        [XmlElement] public int PriorityMsgPort { get; set; } = 7788;
-        [XmlElement] public string I2MsgAddress { get; set; } = "224.1.1.77";
-        [XmlElement] public string InterfaceAddress { get; set; } = "127.0.0.1";
-    }
-
+    
     [XmlRoot("RadarConfig")]
     public class RadarConfig
     {
