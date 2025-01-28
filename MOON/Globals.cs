@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Caching.Memory;
 
-namespace MistWX_i2Me;
+namespace Moon;
 
 public static class Globals
 {

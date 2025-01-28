@@ -1,6 +1,6 @@
 using System.Xml.Serialization;
 
-namespace MistWX_i2Me;
+namespace Moon;
 
 /// <summary>
 /// Class for building the config.xml file used to configure the software

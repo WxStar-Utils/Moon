@@ -1,4 +1,4 @@
-namespace MistWX_i2Me.Schema.ibm;
+namespace Moon.Schema.ibm;
 
 public class AlertDetail
 {

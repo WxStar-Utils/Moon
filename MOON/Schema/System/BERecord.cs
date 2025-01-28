@@ -1,6 +1,6 @@
 using System.Xml.Serialization;
 
-namespace MistWX_i2Me.Schema.System;
+namespace Moon.Schema.System;
 
 [XmlRoot(ElementName = "eActionCd")]
 public class EActionCd

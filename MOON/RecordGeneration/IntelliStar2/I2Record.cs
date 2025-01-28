@@ -1,7 +1,7 @@
 using System.Reflection.Metadata;
 using System.Xml.Linq;
 
-namespace MistWX_i2Me.RecordGeneration;
+namespace Moon.RecordGeneration;
 
 public class I2Record
 {

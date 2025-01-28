@@ -1,6 +1,6 @@
 using System.Xml.Serialization;
 
-namespace MistWX_i2Me.Schema.ibm;
+namespace Moon.Schema.ibm;
 
 [XmlRoot(ElementName = "night")]
 public class Night

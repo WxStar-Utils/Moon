@@ -1,6 +1,6 @@
-using MistWX_i2Me.Schema.System;
+using Moon.Schema.System;
 
-namespace MistWX_i2Me.API;
+namespace Moon.API;
 
 public class GenericResponse<T>
 {

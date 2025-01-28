@@ -1,7 +1,7 @@
 using System.Drawing;
 using Pastel;
 
-namespace MistWX_i2Me;
+namespace Moon;
 
 
 internal class Log

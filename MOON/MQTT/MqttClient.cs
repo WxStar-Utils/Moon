@@ -2,7 +2,7 @@ using System.Collections.Immutable;
 using MQTTnet;
 using MQTTnet.Client;
 
-namespace MistWX_i2Me.MQTT;
+namespace Moon.MQTT;
 
 public class MqttClient
 {

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace MistWX_i2Me.Schema.System;
+namespace Moon.Schema.System;
 
 public class LFRecordLocation
 {

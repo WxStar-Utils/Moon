@@ -1,6 +1,6 @@
-using MistWX_i2Me.Schema.ibm;
+using Moon.Schema.ibm;
 
-namespace MistWX_i2Me.API.Products;
+namespace Moon.API.Products;
 
 public class HeatingCoolingProduct : Base
 {

@@ -1,7 +1,7 @@
-using MistWX_i2Me.API;
-using MistWX_i2Me.Schema.ibm;
+using Moon.API;
+using Moon.Schema.ibm;
 
-namespace MistWX_i2Me.RecordGeneration;
+namespace Moon.RecordGeneration;
 
 public class AchesPainRecord : I2Record
 {

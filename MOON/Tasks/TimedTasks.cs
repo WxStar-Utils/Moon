@@ -1,11 +1,11 @@
 using Microsoft.Extensions.Caching.Memory;
-using MistWX_i2Me.API;
-using MistWX_i2Me.API.Products;
-using MistWX_i2Me.MQTT;
-using MistWX_i2Me.RecordGeneration;
-using MistWX_i2Me.Schema.ibm;
+using Moon.API;
+using Moon.API.Products;
+using Moon.MQTT;
+using Moon.RecordGeneration;
+using Moon.Schema.ibm;
 
-namespace MistWX_i2Me;
+namespace Moon.Tasks;
 
 public class TimedTasks
 {

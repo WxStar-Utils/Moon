@@ -1,12 +1,12 @@
 using System.Xml;
 using System.Xml.Serialization;
 using Dapper;
-using MistWX_i2Me.API;
-using MistWX_i2Me.API.Products;
-using MistWX_i2Me.Schema.ibm;
-using MistWX_i2Me.Schema.System;
+using Moon.API.Products;
+using Moon.API;
+using Moon.Schema.ibm;
+using Moon.Schema.System;
 
-namespace MistWX_i2Me.RecordGeneration;
+namespace Moon.RecordGeneration;
 
 public class AlertBulletin : I2Record
 {
