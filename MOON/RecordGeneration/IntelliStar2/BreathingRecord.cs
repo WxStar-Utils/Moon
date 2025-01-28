@@ -7,7 +7,6 @@ public class BreathingRecord : I2Record
 {
     public async Task<string> MakeRecord(List<GenericResponse<BreathingResponse>> results)
     {
-        string recordPath = Path.Combine(AppContext.BaseDirectory, "temp", "Breathing.xml");
         string recordScript = "<Data type=\"Breathing\">";
 
         foreach (var result in results)
@@ -19,8 +18,6 @@ public class BreathingRecord : I2Record
         
         recordScript += "</Data>";
 
-        await File.WriteAllTextAsync(recordPath, ValidateXml(recordScript));
-        
-        return recordPath;
+        return recordScript;
     }
 }

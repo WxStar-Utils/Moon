@@ -8,7 +8,6 @@ public class AchesPainRecord : I2Record
     public async Task<string> MakeRecord(List<GenericResponse<AchesPainResponse>> results)
     {
         Log.Info("Creating Aches & Pain record.");
-        string recordPath = Path.Combine(AppContext.BaseDirectory, "temp", "AchesAndPains.xml");
         string recordScript = "<Data type=\"AchesAndPains\">";
 
         foreach (var result in results)
@@ -20,8 +19,6 @@ public class AchesPainRecord : I2Record
         
         recordScript += "</Data>";
         
-        await File.WriteAllTextAsync(recordPath, ValidateXml(recordScript));
-
-        return recordPath;
+        return recordScript;
     }
 }

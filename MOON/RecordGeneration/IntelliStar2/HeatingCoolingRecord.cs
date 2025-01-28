@@ -8,7 +8,6 @@ public class HeatingCoolingRecord : I2Record
     public async Task<string> MakeRecord(List<GenericResponse<HeatingCoolingResponse>> results)
     {
         Log.Info("Creating Heating & Cooling record.");
-        string recordPath = Path.Combine(AppContext.BaseDirectory, "temp", "HeatingAndCooling.xml");
         string recordScript = "<Data type=\"HeatingAndCooling\">";
 
         foreach (var result in results)
@@ -19,9 +18,7 @@ public class HeatingCoolingRecord : I2Record
         }
 
         recordScript += "</Data>";
-
-        await File.WriteAllTextAsync(recordPath, ValidateXml(recordScript));
-
-        return recordPath;
+        
+        return recordScript;
     }
 }

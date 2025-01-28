@@ -8,7 +8,6 @@ public class AirQualityRecord : I2Record
     public async Task<string> MakeRecord(List<GenericResponse<AirQualityResponse>> results)
     {
         Log.Info("Creating Air Quality Record");
-        string recordPath = Path.Combine(AppContext.BaseDirectory, "temp", "AirQuality.xml");
         string recordScript = "<Data type=\"AirQuality\">";
 
         foreach (var result in results)
@@ -25,8 +24,6 @@ public class AirQualityRecord : I2Record
         
         recordScript += "</Data>";
 
-        File.WriteAllText(recordPath, ValidateXml(recordScript));
-        
-        return recordPath;
+        return recordScript;
     }
 }

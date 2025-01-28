@@ -8,7 +8,6 @@ public class PollenRecord : I2Record
     public async Task<string> MakeRecord(List<GenericResponse<PollenResponse>> results)
     {
         Log.Info("Creating Pollen Forecast record.");
-        string recordPath = Path.Combine(AppContext.BaseDirectory, "temp", "PollenForecast.xml");
         string recordScript = "<Data type=\"PollenForecast\">";
 
         foreach (var result in results)
@@ -25,8 +24,6 @@ public class PollenRecord : I2Record
         
         recordScript += "</Data>";
         
-        await File.WriteAllTextAsync(recordPath, ValidateXml(recordScript));
-
-        return recordPath;
+        return recordScript;
     }
 }

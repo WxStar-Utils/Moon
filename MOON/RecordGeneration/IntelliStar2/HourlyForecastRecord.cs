@@ -8,7 +8,6 @@ public class HourlyForecastRecord : I2Record
     public async Task<string> MakeRecord(List<GenericResponse<HourlyForecastResponse>> results)
     {
         Log.Info("Creating Hourly Forecast record..");
-        string recordPath = Path.Combine(AppContext.BaseDirectory, "temp", "HourlyForecast.xml");
         string recordScript = "<Data type=\"HourlyForecast\">";
 
         foreach (var result in results)
@@ -20,8 +19,6 @@ public class HourlyForecastRecord : I2Record
 
         recordScript += "</Data>";
 
-        await File.WriteAllTextAsync(recordPath, ValidateXml(recordScript));
-
-        return recordPath;
+        return recordScript;
     }
 }
