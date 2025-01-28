@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MistWX-i2Me", "MistWX-i2Me.csproj", "{308EFE4D-B2F6-45AD-B2D8-09B673DEB2DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOON", "MOON.csproj", "{308EFE4D-B2F6-45AD-B2D8-09B673DEB2DB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWC.I2.MsgEncode", "..\TWC.I2.MsgEncode\TWC.I2.MsgEncode.csproj", "{DAC724A5-DED4-480F-B8D5-30B1F043FAA4}"
 EndProject
@@ -36,5 +36,8 @@ Global
 		{2E471C7F-A21E-48BB-9359-61D0C3F48219}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E471C7F-A21E-48BB-9359-61D0C3F48219}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E471C7F-A21E-48BB-9359-61D0C3F48219}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

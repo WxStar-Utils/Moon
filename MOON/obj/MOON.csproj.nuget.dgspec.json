@@ -1,0 +1,342 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/MOON/MOON.csproj": {}
+  },
+  "projects": {
+    "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/MOON/MOON.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/MOON/MOON.csproj",
+        "projectName": "MOON",
+        "projectPath": "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/MOON/MOON.csproj",
+        "packagesPath": "/home/mewtek/.nuget/packages/",
+        "outputPath": "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/MOON/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/mewtek/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.I2.MsgEncode/TWC.I2.MsgEncode.csproj": {
+                "projectPath": "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.I2.MsgEncode/TWC.I2.MsgEncode.csproj"
+              },
+              "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.Msg/TWC.Msg.csproj": {
+                "projectPath": "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.Msg/TWC.Msg.csproj"
+              },
+              "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.SE.StarBundle/TWC.SE.StarBundle.csproj": {
+                "projectPath": "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.SE.StarBundle/TWC.SE.StarBundle.csproj"
+              },
+              "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.Util/TWC.Util.csproj": {
+                "projectPath": "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.Util/TWC.Util.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.1.35, )"
+            },
+            "Microsoft.Extensions.Caching.Memory": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Pastel": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "System.Data.SQLite": {
+              "target": "Package",
+              "version": "[1.0.119, )"
+            },
+            "System.Text.Json": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.36, 6.0.36]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.linux-x64",
+              "version": "[6.0.36, 6.0.36]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.112/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.I2.MsgEncode/TWC.I2.MsgEncode.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.I2.MsgEncode/TWC.I2.MsgEncode.csproj",
+        "projectName": "TWC.I2.MsgEncode",
+        "projectPath": "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.I2.MsgEncode/TWC.I2.MsgEncode.csproj",
+        "packagesPath": "/home/mewtek/.nuget/packages/",
+        "outputPath": "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.I2.MsgEncode/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/mewtek/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "targetAlias": "netstandard2.0",
+            "projectReferences": {
+              "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.Util/TWC.Util.csproj": {
+                "projectPath": "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.Util/TWC.Util.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.112/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.Msg/TWC.Msg.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.Msg/TWC.Msg.csproj",
+        "projectName": "TWC.Msg",
+        "projectPath": "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.Msg/TWC.Msg.csproj",
+        "packagesPath": "/home/mewtek/.nuget/packages/",
+        "outputPath": "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.Msg/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/mewtek/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "targetAlias": "netstandard2.0",
+            "projectReferences": {
+              "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.Util/TWC.Util.csproj": {
+                "projectPath": "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.Util/TWC.Util.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.112/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.SE.StarBundle/TWC.SE.StarBundle.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.SE.StarBundle/TWC.SE.StarBundle.csproj",
+        "projectName": "TWC.SE.StarBundle",
+        "projectPath": "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.SE.StarBundle/TWC.SE.StarBundle.csproj",
+        "packagesPath": "/home/mewtek/.nuget/packages/",
+        "outputPath": "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.SE.StarBundle/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/mewtek/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "targetAlias": "netstandard2.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            },
+            "SharpZipLib": {
+              "target": "Package",
+              "version": "[1.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.112/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.Util/TWC.Util.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.Util/TWC.Util.csproj",
+        "projectName": "TWC.Util",
+        "projectPath": "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.Util/TWC.Util.csproj",
+        "packagesPath": "/home/mewtek/.nuget/packages/",
+        "outputPath": "/home/mewtek/extra-drives/nvme-storage/Projects/Mist/WXNet/MOON-Update/TWC.Util/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/mewtek/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "targetAlias": "netstandard2.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.112/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
