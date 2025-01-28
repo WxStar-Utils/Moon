@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Caching.Memory;
 using MistWX_i2Me.API;
 using MistWX_i2Me.API.Products;
+using MistWX_i2Me.MQTT;
 using MistWX_i2Me.RecordGeneration;
 using MistWX_i2Me.Schema.ibm;
 
@@ -84,6 +85,10 @@ public class TimedTasks
     /// <param name="generationInterval"></param>
     public static async Task HourlyRecordGenTask(string[] locations)
     {
+        MqttClient mqttClient = new MqttClient();
+
+        mqttClient.Connect();
+        
         while (true)
         {
             var currentTime = DateTime.Now;
@@ -100,7 +105,8 @@ public class TimedTasks
             Log.Info("Running hourly record collection");
             
             // TODO: This could probably be a better system, but this is the simplest implementation for this for the
-            //       time being.
+            //       time being. Maybe a dictionary system for the records instead of making them all their own object?
+            //       Would make really good use of the base DataType variable.
             
             
             // Implements suggestion #3 in the issue tracker.
@@ -110,48 +116,72 @@ public class TimedTasks
                 List<GenericResponse<CurrentObservationsResponse>> obs =
                     await new CurrentObservationsProduct().Populate(locations);
                 string obsRecord = await new CurrentObsRecord().MakeRecord(obs);
+                mqttClient.PublishFile(obsRecord,
+                    "storeData(QGROUP=__CurrentObservations__,Feed=CurrentObservations)",
+                    "i2m/global");
             }
 
             if (dataConfig.DailyForecast)
             {
                 List<GenericResponse<DailyForecastResponse>> dfs = await new DailyForecastProduct().Populate(locations);
                 string dfsRecord = await new DailyForecastRecord().MakeRecord(dfs);
+                mqttClient.PublishFile(dfsRecord,
+                    "storeData(QGROUP=DailyForecast,Feed=DailyForecast)",
+                    "i2m/global");
             }
 
             if (dataConfig.HourlyForecast)
             {
                 List<GenericResponse<HourlyForecastResponse>> hfs = await new HourlyForecastProduct().Populate(locations);
                 string hfsRecord = await new HourlyForecastRecord().MakeRecord(hfs);
+                mqttClient.PublishFile(hfsRecord,
+                    "storeData(QGROUP=__HourlyForecast__,Feed=HourlyForecast)",
+                    "i2m/global");
             }
 
             if (dataConfig.AirQuality)
             {
                 List<GenericResponse<AirQualityResponse>> aiqs = await new AirQualityProduct().Populate(locations);
                 string aiqsRecord = await new AirQualityRecord().MakeRecord(aiqs);
+                mqttClient.PublishFile(aiqsRecord,
+                    "storeData(QGROUP=__AirQuality__,Feed=AirQuality)",
+                    "i2m/global");
             }
 
             if (dataConfig.PollenForecast)
             {
                 List<GenericResponse<PollenResponse>> pfs = await new PollenForecastProduct().Populate(locations);
                 string pfsRecord = await new PollenRecord().MakeRecord(pfs);
+                mqttClient.PublishFile(pfsRecord,
+                    "storeData(QGROUP=__PollenForecast__,Feed=PollenForecast)",
+                    "i2m/global");
             }
 
             if (dataConfig.HeatingAndCooling)
             {
                 List<GenericResponse<HeatingCoolingResponse>> hcs = await new HeatingCoolingProduct().Populate(locations);
                 string hcsRecord = await new HeatingCoolingRecord().MakeRecord(hcs);
+                mqttClient.PublishFile(hcsRecord,
+                    "storeData(QGROUP=__HeatingAndCooling__,Feed=HeatingAndCooling)",
+                    "i2m/global");
             }
 
             if (dataConfig.AchesAndPains)
             {
                 List<GenericResponse<AchesPainResponse>> acps = await new AchesPainProduct().Populate(locations);
                 string acpsRecord = await new AchesPainRecord().MakeRecord(acps);
+                mqttClient.PublishFile(acpsRecord,
+                    "storeData(QGROUP=__AchesAndPains__,Feed=AchesAndPains)",
+                    "i2m/global");
             }
 
             if (dataConfig.Breathing)
             {
                 List<GenericResponse<BreathingResponse>> brs = await new BreathingProduct().Populate(locations);
                 string brsRecord = await new BreathingRecord().MakeRecord(brs);
+                mqttClient.PublishFile(brsRecord,
+                    "storeData(QGROUP=__Breathing__,Feed=Breathing)",
+                    "i2m/global");
             }
 
             if (Globals.FreshStart)

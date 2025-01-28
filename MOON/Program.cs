@@ -3,6 +3,7 @@ using System.Xml.Serialization;
 using MistWX_i2Me;
 using MistWX_i2Me.API;
 using MistWX_i2Me.API.Products;
+using MistWX_i2Me.MQTT;
 using MistWX_i2Me.RecordGeneration;
 using MistWX_i2Me.Schema.ibm;
 using MistWX_i2Me.Schema.System;
@@ -17,10 +18,11 @@ public class Program
         Console.WriteLine("Developed by April P. with <3");
         Console.WriteLine("Weather information collected from The National Weather Service & The Weather Company");
         Console.WriteLine("--------------------------------------------------------------------------------------");
-        Log.Info("Starting i2ME...");
-
-        Config config = Config.Load();
+        Log.Info("Starting MOON...");
         
+        MqttClient mqttClient = new MqttClient();
+        Config config = Config.Load();
+
         Log.SetLogLevel(config.LogLevel);
 
         string[] locations;
