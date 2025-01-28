@@ -77,7 +77,12 @@ public class TimedTasks
 
     }
     
-    public static async Task RecordGenTask(string[] locations, int generationInterval)
+    /// <summary>
+    /// Generates all data for units regardless of type. 
+    /// </summary>
+    /// <param name="locations"></param>
+    /// <param name="generationInterval"></param>
+    public static async Task HourlyRecordGenTask(string[] locations, int generationInterval)
     {
         while (true)
         {
