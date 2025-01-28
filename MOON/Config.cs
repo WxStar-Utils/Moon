@@ -15,7 +15,6 @@ public class Config
     [XmlElement] public bool GetAlerts { get; set; } = true;
     
     [XmlElement] public bool UseNationalLocations { get; set; } = false;
-    [XmlElement] public int RecordGenTimeSeconds { get; set; } = 3600;      // Defaults to 1 hour
     [XmlElement] public int CheckAlertTimeSeconds { get; set; } = 600;      // Defaults to 10 minutes
     
     [XmlElement] public NetworkConfig UnitConfig { get; set; } = new NetworkConfig();

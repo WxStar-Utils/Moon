@@ -5,6 +5,11 @@ namespace MistWX_i2Me;
 public static class Globals
 {
     /// <summary>
+    /// Flag used to determine whether or not to perform data collection on startup
+    /// </summary>
+    public static bool FreshStart = true;
+    
+    /// <summary>
     /// Memory cache for storing LFRecord objects
     /// </summary>
     public static IMemoryCache LocationCache = new MemoryCache(new MemoryCacheOptions());

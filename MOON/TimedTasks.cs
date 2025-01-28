@@ -86,6 +86,15 @@ public class TimedTasks
     {
         while (true)
         {
+            var currentTime = DateTime.Now;
+            
+            // Don't generate if we're not at the start of the hour 
+            if (currentTime.Minute != 0 && !Globals.FreshStart)
+            {
+                await Task.Delay(30 * 1000);
+                continue;
+            }
+            
             Config.DataEndpointConfig dataConfig = Config.config.DataConfig;
             
             Log.Info("Running hourly record collection");
@@ -145,9 +154,14 @@ public class TimedTasks
                 string brsRecord = await new BreathingRecord().MakeRecord(brs);
             }
 
-            string nextTimestamp = DateTime.Now.AddSeconds(generationInterval).ToString("h:mm tt");
+            if (Globals.FreshStart)
+            {
+                Globals.FreshStart = false;
+            }
             
-            Log.Info($"Next record generation will be at {nextTimestamp}");
+            await Task.Delay(120 * 1000);
+            
+            
             
             await Task.Delay(generationInterval * 1000);
         }
