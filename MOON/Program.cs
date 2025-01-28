@@ -3,7 +3,6 @@ using System.Xml.Serialization;
 using MistWX_i2Me;
 using MistWX_i2Me.API;
 using MistWX_i2Me.API.Products;
-using MistWX_i2Me.Communication;
 using MistWX_i2Me.RecordGeneration;
 using MistWX_i2Me.Schema.ibm;
 using MistWX_i2Me.Schema.System;
@@ -27,11 +26,6 @@ public class Program
 
         Config config = Config.Load();
         
-        UdpSender routineSender = new UdpSender(config.UnitConfig.I2MsgAddress, config.UnitConfig.RoutineMsgPort,
-                config.UnitConfig.InterfaceAddress);
-        UdpSender prioritySender = new UdpSender(config.UnitConfig.I2MsgAddress, config.UnitConfig.PriorityMsgPort,
-            config.UnitConfig.InterfaceAddress);
-
         Log.SetLogLevel(config.LogLevel);
 
         string[] locations;
@@ -56,8 +50,8 @@ public class Program
             locations = await GetMachineLocations(config);
         }
 
-        Task checkAlerts = TimedTasks.CheckForAlerts(locations, prioritySender, config.CheckAlertTimeSeconds);
-        Task recordGenTask = TimedTasks.RecordGenTask(locations, routineSender, config.RecordGenTimeSeconds);
+        Task checkAlerts = TimedTasks.CheckForAlerts(locations, config.CheckAlertTimeSeconds);
+        Task recordGenTask = TimedTasks.RecordGenTask(locations, config.RecordGenTimeSeconds);
         Task clearAlertsCache = TimedTasks.ClearExpiredAlerts();
         await Task.WhenAll(checkAlerts, recordGenTask, clearAlertsCache);
 
