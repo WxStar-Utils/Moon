@@ -82,7 +82,7 @@ public class TimedTasks
     /// </summary>
     /// <param name="locations"></param>
     /// <param name="generationInterval"></param>
-    public static async Task HourlyRecordGenTask(string[] locations, int generationInterval)
+    public static async Task HourlyRecordGenTask(string[] locations)
     {
         while (true)
         {
@@ -160,10 +160,6 @@ public class TimedTasks
             }
             
             await Task.Delay(120 * 1000);
-            
-            
-            
-            await Task.Delay(generationInterval * 1000);
         }
     }
 }
