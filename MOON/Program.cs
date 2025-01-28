@@ -11,15 +11,10 @@ public class Program
 {
     static async Task Main(string[] args)
     {
-        Console.WriteLine("d8b  .d8888b.  888b     d888 8888888888 \nY8P d88P  Y88b 8888b   d8888 888        \n           " +
-                          "888 88888b.d88888 888        \n888      .d88P 888Y88888P888 8888888    \n888  .od888P" +
-                          "\"  888 Y888P 888 888        " +
-                          "\n888 d88P\"      888  Y8P  888 888        \n888 888\"       888   \"   888 888        " +
-                          "\n888 888888888  888       " +
-                          "888 8888888888 ");
+        Console.WriteLine("\r\n\r\n888b     d888  .d88888b.   .d88888b.  888b    888 \r\n8888b   d8888 d88P\" \"Y88b d88P\" \"Y88b 8888b   888 \r\n88888b.d88888 888     888 888     888 88888b  888 \r\n888Y88888P888 888     888 888     888 888Y88b 888 \r\n888 Y888P 888 888     888 888     888 888 Y88b888 \r\n888  Y8P  888 888     888 888     888 888  Y88888 \r\n888   \"   888 Y88b. .d88P Y88b. .d88P 888   Y8888 \r\n888       888  \"Y88888P\"   \"Y88888P\"  888    Y888 \r\n                                                  \r\n                                                  \r\n                                                  \r\n\r\n");
         
         Console.WriteLine("(C) Mist Weather Media");
-        Console.WriteLine("This project is licensed under the AGPL v3.0 license.");
+        Console.WriteLine("Developed by April P. with <3");
         Console.WriteLine("Weather information collected from The National Weather Service & The Weather Company");
         Console.WriteLine("--------------------------------------------------------------------------------------");
         Log.Info("Starting i2ME...");
