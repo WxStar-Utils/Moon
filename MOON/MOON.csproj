@@ -20,7 +20,6 @@
     <ItemGroup>
       <Folder Include="API\WXNet\" />
       <Folder Include="Data\" />
-      <Folder Include="MQTT\" />
       <Folder Include="Schema\WXNet\" />
     </ItemGroup>
 
