@@ -42,7 +42,7 @@ public class Program
         }
         else
         {
-            locations = await GetMachineLocations(config);
+            locations = new string[] { "USWA0028" };
         }
 
         Task checkAlerts = TimedTasks.CheckForAlerts(locations, config.CheckAlertTimeSeconds);
@@ -50,85 +50,5 @@ public class Program
         Task clearAlertsCache = TimedTasks.ClearExpiredAlerts();
         await Task.WhenAll(checkAlerts, recordGenTask, clearAlertsCache);
 
-    }
-
-    /// <summary>
-    /// Runs through the pre-existing MachineProductConfig.xml file to scrape what locations that need
-    /// weather information collected.
-    /// </summary>
-    private static async Task<string[]> GetMachineLocations(Config config)
-    {
-        List<string> locations = new List<string>();
-
-        Log.Info("Getting locations for this unit..");
-
-        string copyPath = Path.Combine(AppContext.BaseDirectory, "MachineProductConfig.xml");
-
-        if (File.Exists(copyPath))
-        {
-            File.Delete(copyPath);
-        }
-
-        if (!File.Exists(config.MachineProductConfig))
-        {
-            Log.Error("Unable to locate MachineProductConfig.xml");
-            return locations.ToArray();
-        }
-        
-        File.Copy(config.MachineProductConfig, copyPath);
-
-        MachineProductConfig mpc;
-        
-        using (var reader = new StreamReader(copyPath))
-        {
-            mpc = (MachineProductConfig) new XmlSerializer(typeof(MachineProductConfig)).Deserialize(reader);
-        }
-
-        var configLocationKeys = new List<string>
-        {
-            "PrimaryLocation",
-            "NearbyLocation1",
-            "NearbyLocation2",
-            "NearbyLocation3",
-            "NearbyLocation4",
-            "NearbyLocation5",
-            "NearbyLocation6",
-            "NearbyLocation7",
-            "NearbyLocation8",
-            "MetroMapCity1",
-            "MetroMapCity2",
-            "MetroMapCity3",
-            "MetroMapCity4",
-            "MetroMapCity5",
-            "MetroMapCity6",
-            "MetroMapCity7",
-            "MetroMapCity8",
-        };
-
-        foreach (ConfigItem i in mpc.ConfigDef.ConfigItems.ConfigItem)
-        {
-            if (configLocationKeys.Contains(i.Key))
-            {
-                Log.Debug(i.Value);
-                if (string.IsNullOrEmpty(i.Value.ToString()))
-                {
-                    continue;
-                }
-
-
-                try
-                {
-                    string choppedValue = i.Value.ToString().Split("1_US_")[1];
-
-                    locations.Add(choppedValue);
-                }
-                catch (Exception ex)
-                {
-                    continue;
-                }
-            }
-        }
-        
-        return locations.ToArray();
     }
 }

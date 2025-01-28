@@ -13,12 +13,7 @@ public class Config
     [XmlElement] public string TwcApiKey { get; set; } = "REPLACE_ME";
     [XmlElement] public string LogLevel { get; set; } = "info";
     [XmlElement] public bool GetAlerts { get; set; } = true;
-
-    // Used to process what locations to generate
-    [XmlElement]
-    public string MachineProductConfig { get; set; } =
-        "C:\\Program Files (x86)\\TWC\\i2\\Managed\\Config\\MachineProductCfg.xml";
-
+    
     [XmlElement] public bool UseNationalLocations { get; set; } = false;
     [XmlElement] public int RecordGenTimeSeconds { get; set; } = 3600;      // Defaults to 1 hour
     [XmlElement] public int CheckAlertTimeSeconds { get; set; } = 600;      // Defaults to 10 minutes
