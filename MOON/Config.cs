@@ -11,12 +11,15 @@ public class Config
     // Config Elements \\
     
     [XmlElement] public string TwcApiKey { get; set; } = "REPLACE_ME";
+    [XmlElement] public string WxNetToken { get; set; } = "REPLACE_ME";
     [XmlElement] public string LogLevel { get; set; } = "info";
     [XmlElement] public bool GetAlerts { get; set; } = true;
     
     [XmlElement] public bool UseNationalLocations { get; set; } = false;
     [XmlElement] public int CheckAlertTimeSeconds { get; set; } = 600;      // Defaults to 10 minutes
-    
+
+    [XmlElement("MQTTConfig")] public MqttConfig Mqtt { get; set; } = new MqttConfig();
+
     [XmlElement("RadarConfig")] public RadarConfig RadarConfiguration { get; set; } = new RadarConfig();
     [XmlElement("DataConfig")] public DataEndpointConfig DataConfig { get; set; } = new DataEndpointConfig();
 
@@ -66,6 +69,26 @@ public class Config
         
     }
 
+    [XmlRoot("MQTTConfig")]
+    public class MqttConfig
+    {
+        [XmlElement] public string Host { get; set; } = "127.0.0.1";
+        [XmlElement] public int Port { get; set; } = 1883;
+        [XmlElement] public string Username { get; set; } = "MOON";
+        [XmlElement] public string Password { get; set; } = "intellistar";
+        [XmlElement] public bool UseWebsockets { get; set; } = false;
+        [XmlElement] public bool UseTLS { get; set; } = false;
+        [XmlElement] public bool TLSInsecure { get; set; } = false;
+        [XmlElement] public int? QOS { get; set; }
+    }
+
+    [XmlRoot("WebhookLogger")]
+    public class WebhookLogger
+    {
+        [XmlElement] public bool Enabled { get; set; } = false;
+        [XmlElement] public string WebhookUrl { get; set; } = "REPLACE_ME";
+        [XmlElement] public string AvatarUrl { get; set; } = "REPLACE_ME";
+    }
     
     [XmlRoot("RadarConfig")]
     public class RadarConfig
