@@ -21,9 +21,8 @@ public class Program
         Console.WriteLine("--------------------------------------------------------------------------------------");
         Log.Info("Starting MOON...");
         
-        MqttClient mqttClient = new MqttClient();
         Config config = Config.Load();
-
+        MqttDistributor.Connect();
         Log.SetLogLevel(config.LogLevel);
 
         string[] locations;
