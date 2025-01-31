@@ -17,9 +17,6 @@ public class TimedTasks
     /// <param name="sender">UdpSender, prefer priority port</param>
     public static async Task CheckForAlerts(string[] locations, int checkInterval)
     {
-        MqttClient mqttClient = new MqttClient();
-        mqttClient.Connect();
-        
         if (Config.config.UseNationalLocations || !Config.config.GetAlerts)
         {
             Log.Debug("Disabling alert generation.");
@@ -44,7 +41,7 @@ public class TimedTasks
 
             Log.Debug(bulletinRecord);
             
-            mqttClient.PublishFile(
+            MqttDistributor.PublishFile(
                 bulletinRecord, 
                 "storeData(QGROUP=__BERecord__,Feed=BERecord)",
                 "i2m/urgent");
@@ -97,10 +94,6 @@ public class TimedTasks
     /// <param name="generationInterval"></param>
     public static async Task HourlyRecordGenTask(string[] locations)
     {
-        MqttClient mqttClient = new MqttClient();
-
-        mqttClient.Connect();
-        
         while (true)
         {
             var currentTime = DateTime.Now;
@@ -128,7 +121,7 @@ public class TimedTasks
                 List<GenericResponse<CurrentObservationsResponse>> obs =
                     await new CurrentObservationsProduct().Populate(locations);
                 string obsRecord = await new CurrentObsRecord().MakeRecord(obs);
-                mqttClient.PublishFile(obsRecord,
+                MqttDistributor.PublishFile(obsRecord,
                     "storeData(QGROUP=__CurrentObservations__,Feed=CurrentObservations)",
                     "i2m/global");
             }
@@ -137,7 +130,7 @@ public class TimedTasks
             {
                 List<GenericResponse<DailyForecastResponse>> dfs = await new DailyForecastProduct().Populate(locations);
                 string dfsRecord = await new DailyForecastRecord().MakeRecord(dfs);
-                mqttClient.PublishFile(dfsRecord,
+                MqttDistributor.PublishFile(dfsRecord,
                     "storeData(QGROUP=DailyForecast,Feed=DailyForecast)",
                     "i2m/global");
             }
@@ -146,7 +139,7 @@ public class TimedTasks
             {
                 List<GenericResponse<HourlyForecastResponse>> hfs = await new HourlyForecastProduct().Populate(locations);
                 string hfsRecord = await new HourlyForecastRecord().MakeRecord(hfs);
-                mqttClient.PublishFile(hfsRecord,
+                MqttDistributor.PublishFile(hfsRecord,
                     "storeData(QGROUP=__HourlyForecast__,Feed=HourlyForecast)",
                     "i2m/global");
             }
@@ -155,7 +148,7 @@ public class TimedTasks
             {
                 List<GenericResponse<AirQualityResponse>> aiqs = await new AirQualityProduct().Populate(locations);
                 string aiqsRecord = await new AirQualityRecord().MakeRecord(aiqs);
-                mqttClient.PublishFile(aiqsRecord,
+                MqttDistributor.PublishFile(aiqsRecord,
                     "storeData(QGROUP=__AirQuality__,Feed=AirQuality)",
                     "i2m/global");
             }
@@ -164,7 +157,7 @@ public class TimedTasks
             {
                 List<GenericResponse<PollenResponse>> pfs = await new PollenForecastProduct().Populate(locations);
                 string pfsRecord = await new PollenRecord().MakeRecord(pfs);
-                mqttClient.PublishFile(pfsRecord,
+                MqttDistributor.PublishFile(pfsRecord,
                     "storeData(QGROUP=__PollenForecast__,Feed=PollenForecast)",
                     "i2m/global");
             }
@@ -173,7 +166,7 @@ public class TimedTasks
             {
                 List<GenericResponse<HeatingCoolingResponse>> hcs = await new HeatingCoolingProduct().Populate(locations);
                 string hcsRecord = await new HeatingCoolingRecord().MakeRecord(hcs);
-                mqttClient.PublishFile(hcsRecord,
+                MqttDistributor.PublishFile(hcsRecord,
                     "storeData(QGROUP=__HeatingAndCooling__,Feed=HeatingAndCooling)",
                     "i2m/global");
             }
@@ -182,7 +175,7 @@ public class TimedTasks
             {
                 List<GenericResponse<AchesPainResponse>> acps = await new AchesPainProduct().Populate(locations);
                 string acpsRecord = await new AchesPainRecord().MakeRecord(acps);
-                mqttClient.PublishFile(acpsRecord,
+                MqttDistributor.PublishFile(acpsRecord,
                     "storeData(QGROUP=__AchesAndPains__,Feed=AchesAndPains)",
                     "i2m/global");
             }
@@ -191,7 +184,7 @@ public class TimedTasks
             {
                 List<GenericResponse<BreathingResponse>> brs = await new BreathingProduct().Populate(locations);
                 string brsRecord = await new BreathingRecord().MakeRecord(brs);
-                mqttClient.PublishFile(brsRecord,
+                MqttDistributor.PublishFile(brsRecord,
                     "storeData(QGROUP=__Breathing__,Feed=Breathing)",
                     "i2m/global");
             }
