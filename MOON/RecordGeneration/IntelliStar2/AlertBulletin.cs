@@ -175,7 +175,6 @@ public class AlertBulletin : I2Record
 
     public async Task<string?> MakeRecord(List<GenericResponse<AlertDetailResponse>> alertDetails)
     {
-        string recordPath = Path.Combine(AppContext.BaseDirectory, "temp", "BERecord.xml");
         BERecordRoot root = new BERecordRoot();
         List<BERecord> alerts = new List<BERecord>();
 
@@ -184,8 +183,7 @@ public class AlertBulletin : I2Record
 
         if (alertDetails.Count < 1)
         {
-            await File.WriteAllTextAsync(recordPath, "<Data type=\"BERecord\"><BERecord></BERecord></Data>");
-            return recordPath;
+            return "<Data type=\"BERecord\"><BERecord></BERecord></Data";
         }
 
         foreach (var details in alertDetails)
@@ -281,13 +279,13 @@ public class AlertBulletin : I2Record
         XmlSerializer serializer = new XmlSerializer(typeof(BERecordRoot));
         XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
         ns.Add("", "");
-        using (StreamWriter sw = new StreamWriter(recordPath))
+        using (StringWriter sw = new StringWriter())
         {
             serializer.Serialize(sw, root, ns);
             sw.Close();
-        }
 
-        return recordPath;
+            return sw.ToString();
+        }
     }
     
 }
