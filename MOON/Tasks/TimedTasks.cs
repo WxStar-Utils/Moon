@@ -17,13 +17,14 @@ public class TimedTasks
     /// <param name="sender">UdpSender, prefer priority port</param>
     public static async Task CheckForAlerts(string[] locations, int checkInterval)
     {
+        MqttClient mqttClient = new MqttClient();
+        mqttClient.Connect();
+        
         if (Config.config.UseNationalLocations || !Config.config.GetAlerts)
         {
             Log.Debug("Disabling alert generation.");
             return;
         }
-        
-        MqttClient mqttClient = new MqttClient();
         
         while (true)
         {
@@ -41,10 +42,14 @@ public class TimedTasks
 
             string? bulletinRecord = await new AlertBulletin().MakeRecord(alerts);
 
+            Log.Debug(bulletinRecord);
+            
             mqttClient.PublishFile(
                 bulletinRecord, 
                 "storeData(QGROUP=__BERecord__,Feed=BERecord)",
                 "i2m/urgent");
+            
+            Log.Debug("By this point, the record should be sent out.");
             
             await Task.Delay(checkInterval * 1000);
         }
