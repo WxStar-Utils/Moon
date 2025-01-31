@@ -27,6 +27,7 @@ public class Program
         Log.SetLogLevel(config.LogLevel);
 
         string[] locations;
+        await Mist.GetActiveLocations();
         
         if (config.UseNationalLocations)
         {
@@ -45,13 +46,22 @@ public class Program
         }
         else
         {
-            locations = await Mist.GetActiveLocations();
+            locations = Mist.Locations;
         }
 
+        // Data generation tasks
         Task checkAlerts = TimedTasks.CheckForAlerts(locations, config.CheckAlertTimeSeconds);
         Task recordGenTask = TimedTasks.HourlyRecordGenTask(locations);
         Task clearAlertsCache = TimedTasks.ClearExpiredAlerts();
-        await Task.WhenAll(checkAlerts, recordGenTask, clearAlertsCache);
+        
+        // Mist API tasks
+        Task refreshLocations = ApiTasks.UpdateLocations();
+        
+        await Task.WhenAll(
+            checkAlerts, 
+            recordGenTask, 
+            clearAlertsCache,
+            refreshLocations);
 
     }
 }
