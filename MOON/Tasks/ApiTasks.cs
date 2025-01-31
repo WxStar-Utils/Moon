@@ -1,3 +1,5 @@
+using Moon.API;
+
 namespace Moon.Tasks;
 
 public class ApiTasks
@@ -17,7 +19,13 @@ public class ApiTasks
     /// </summary>
     public static async Task UpdateLocations()
     {
-        // TODO:
-        return;
+        while (true)
+        {
+            Log.Info("Refreshing Mist locations cache.");
+
+            await Mist.GetActiveLocations();
+
+            await Task.Delay(1800 * 1000);    // Checks every 30 minutes by default.
+        }
     }
 }
