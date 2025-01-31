@@ -284,7 +284,7 @@ public class AlertBulletin : I2Record
             serializer.Serialize(sw, root, ns);
             sw.Close();
 
-            return sw.ToString();
+            return sw.ToString().Replace("\n", "").Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>", "");
         }
     }
     
