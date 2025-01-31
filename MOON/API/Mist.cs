@@ -5,6 +5,7 @@ namespace Moon.API;
 public class Mist
 {
     private static readonly HttpClient Client = new HttpClient();
+    public static string[] Locations = { };
     
     /// <summary>
     /// Retrieves the current unit locations for the 
@@ -21,7 +22,8 @@ public class Mist
         MistLocationsResponse locationsResponse = JsonSerializer.
             Deserialize<MistLocationsResponse>(responseBody);
 
-        return locationsResponse.locations.ToArray();
+        Locations = locationsResponse.locations.ToArray();
+        return Locations;
     }
 }
 
