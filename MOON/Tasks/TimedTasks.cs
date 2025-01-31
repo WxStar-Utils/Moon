@@ -23,6 +23,8 @@ public class TimedTasks
             return;
         }
         
+        MqttClient mqttClient = new MqttClient();
+        
         while (true)
         {
             Log.Info("Checking for new alerts..");
@@ -38,6 +40,11 @@ public class TimedTasks
             List<GenericResponse<AlertDetailResponse>> alerts = await new AlertDetailsProduct().Populate(headlines);
 
             string? bulletinRecord = await new AlertBulletin().MakeRecord(alerts);
+
+            mqttClient.PublishFile(
+                bulletinRecord, 
+                "storeData(QGROUP=__BERecord__,Feed=BERecord)",
+                "i2m/urgent");
             
             await Task.Delay(checkInterval * 1000);
         }
