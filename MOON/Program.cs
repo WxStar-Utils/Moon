@@ -45,7 +45,7 @@ public class Program
         }
         else
         {
-            locations = new string[] { "USWA0028" };
+            locations = await Mist.GetActiveLocations();
         }
 
         Task checkAlerts = TimedTasks.CheckForAlerts(locations, config.CheckAlertTimeSeconds);
