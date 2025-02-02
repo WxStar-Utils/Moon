@@ -27,25 +27,37 @@ public class Base
     public async Task<string> DownloadRecord(string url)
     {
         Log.Debug(url);
-        HttpResponseMessage response = await Client.GetAsync(url);
-        response.EnsureSuccessStatusCode();
-        
-        Log.Debug(response.StatusCode.ToString());
-        if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+
+        try
+        {
+            HttpResponseMessage response = await Client.GetAsync(url);
+            // response.EnsureSuccessStatusCode();
+
+            Log.Debug(response.StatusCode.ToString());
+
+            if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+            {
+                Log.Debug("Bad Request issue!");
+
+                return String.Empty;
+            }
+            
+            if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+            {
+                return String.Empty;
+            }
+
+
+            byte[] content = await Client.GetByteArrayAsync(url);
+            string contentString = Encoding.UTF8.GetString(content);
+
+            return contentString;
+        }
+        catch (Exception ex)
         {
             return String.Empty;
         }
 
-        if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
-        {
-            Log.Debug($"Request for {RecordName} failed with error 400.");
-            return String.Empty;
-        }
-
-        byte[] content = await Client.GetByteArrayAsync(url);
-        string contentString = Encoding.UTF8.GetString(content);
-
-        return contentString;
     }
 
     
@@ -160,7 +172,7 @@ public class Base
             LFRecordLocation locationInfo = await GetLocInfo(location);
             string? response = await DownloadLocationData(locationInfo);
 
-            if (response == null)
+            if (String.IsNullOrEmpty(response))
             {
                 return results;
             }
@@ -184,7 +196,7 @@ public class Base
                     results.Add(new GenericResponse<T>(locationInfo, data, deserializedData));
                 }
             }
-            catch (InvalidOperationException ex)
+            catch (Exception ex)
             {
                 Log.Debug(ex.Message);
                 Log.Debug(ex.StackTrace);
