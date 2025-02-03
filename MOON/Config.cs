@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 
 namespace Moon;
@@ -8,6 +9,8 @@ namespace Moon;
 [XmlRoot("Config")]
 public class Config
 {
+    public static string ConfigPath { get; set; } = Path.Combine(AppContext.BaseDirectory, "config.xml");
+
     // Config Elements \\
     
     [XmlElement] public string TwcApiKey { get; set; } = "REPLACE_ME";
@@ -34,7 +37,6 @@ public class Config
     /// <returns>Config object</returns>
     public static Config Load()
     {
-        string path = Path.Combine(AppContext.BaseDirectory, "config.xml");
         XmlSerializer serializer = new XmlSerializer(typeof(Config));
         XmlSerializerNamespaces namespaces = new XmlSerializerNamespaces();
         namespaces.Add("", "");
@@ -46,15 +48,15 @@ public class Config
         }
         
         // Create a base config if none exists
-        if (!File.Exists(path))
+        if (!File.Exists(ConfigPath))
         {
             config = new Config();
-            serializer.Serialize(File.Create(path), config, namespaces);
+            serializer.Serialize(File.Create(ConfigPath), config, namespaces);
 
             return config;
         }
 
-        using (FileStream stream = new FileStream(path, FileMode.Open))
+        using (FileStream stream = new FileStream(ConfigPath, FileMode.Open))
         {
             var deserializedConfig = serializer.Deserialize(stream);
 
