@@ -17,9 +17,8 @@ internal class Log
     private static Color COLOR_WARNING = Color.Yellow;
     private static Color COLOR_INFO = Color.Azure;
 
-    private static LogLevel _logLevel = LogLevel.Debug;
-
-    private static string LogStartDate = DateTime.Today.ToString("ddMMyyyy");
+    private static LogLevel LOG_LEVEL = LogLevel.Debug;
+    private static string LOG_START_DATE = DateTime.Today.ToString("ddMMyyyy");
 
     private static string GetCurrentTime()
     {
@@ -34,17 +33,17 @@ internal class Log
         {
             case "debug": 
                 Warning("LogLevel is set to debug. This can cause minor slowdowns when generating data.");
-                _logLevel = LogLevel.Debug;
+                LOG_LEVEL = LogLevel.Debug;
                 break;
-            case "info": _logLevel = LogLevel.Info; break;
-            case "warning": _logLevel = LogLevel.Warning; break;
+            case "info": LOG_LEVEL = LogLevel.Info; break;
+            case "warning": LOG_LEVEL = LogLevel.Warning; break;
         }
     }
 
 
     public static void Debug(string str)
     {
-        if (_logLevel > LogLevel.Debug) return;
+        if (LOG_LEVEL > LogLevel.Debug) return;
         str = GetCurrentTime() + PREFIX_DEBUG + str;
         Console.WriteLine(str.Pastel(COLOR_DEBUG));
         WriteLogToFile(str);
@@ -52,7 +51,7 @@ internal class Log
     
     public static void Error(string str)
     {
-        if (_logLevel > LogLevel.Warning) return;
+        if (LOG_LEVEL > LogLevel.Warning) return;
         str = GetCurrentTime() + PREFIX_ERROR + str;
         Console.WriteLine(str.Pastel(COLOR_ERROR));
         WriteLogToFile(str);
@@ -60,7 +59,7 @@ internal class Log
     
     public static void Warning(string str)
     {
-        if (_logLevel > LogLevel.Warning) return;
+        if (LOG_LEVEL > LogLevel.Warning) return;
         str = GetCurrentTime() + PREFIX_WARNING + str;
         Console.WriteLine(str.Pastel(COLOR_WARNING));
         WriteLogToFile(str);
@@ -68,7 +67,7 @@ internal class Log
     
     public static void Info(string str)
     {
-        if (_logLevel > LogLevel.Info) return;
+        if (LOG_LEVEL > LogLevel.Info) return;
         str = GetCurrentTime() + PREFIX_INFO + str;
         Console.WriteLine(str.Pastel(COLOR_INFO));
         WriteLogToFile(str);
@@ -83,7 +82,7 @@ internal class Log
             Directory.CreateDirectory(Path.Combine(AppContext.BaseDirectory, "Logs"));
         }
         
-        string fileName = Path.Combine(AppContext.BaseDirectory, "Logs", $"I2ME-{LogStartDate}.log");
+        string fileName = Path.Combine(AppContext.BaseDirectory, "Logs", $"{LOG_START_DATE}.log");
 
         using (StreamWriter sw = File.AppendText(fileName))
         {
