@@ -15,7 +15,7 @@ public class Program
     {
         Console.WriteLine("\r\n\r\n888b     d888  .d88888b.   .d88888b.  888b    888 \r\n8888b   d8888 d88P\" \"Y88b d88P\" \"Y88b 8888b   888 \r\n88888b.d88888 888     888 888     888 88888b  888 \r\n888Y88888P888 888     888 888     888 888Y88b 888 \r\n888 Y888P 888 888     888 888     888 888 Y88b888 \r\n888  Y8P  888 888     888 888     888 888  Y88888 \r\n888   \"   888 Y88b. .d88P Y88b. .d88P 888   Y8888 \r\n888       888  \"Y88888P\"   \"Y88888P\"  888    Y888 \r\n                                                  \r\n                                                  \r\n                                                  \r\n\r\n");
         
-        Console.WriteLine("(C) Mist Weather Media");
+        Console.WriteLine("(C) Overcast Systems / Mist Weather Media");
         Console.WriteLine("Developed by April P. with <3");
         Console.WriteLine("Weather information collected from The National Weather Service & The Weather Company");
         Console.WriteLine("--------------------------------------------------------------------------------------");
