@@ -19,6 +19,11 @@ public class ApiTasks
     /// </summary>
     public static async Task UpdateLocations()
     {
+        if (Config.config.UseNationalLocations)
+        {
+            return;
+        }
+        
         while (true)
         {
             Log.Info("Refreshing Mist locations cache.");
