@@ -67,7 +67,7 @@ public class Program
                 "USWI0455", "USMN0503", "USTN0357", "USLA0338", "USNY0996", "USNJ0355", "USVA0557", "USOK0400",
                 "USNE0363", "USFL0372", "USPA1276", "USAZ0166", "USPA1290", "USME0328", "USOR0275", "USNC0558",
                 "USSD0283", "USNV0076", "USCA0967", "USUT0225", "USTX1200", "USCA0982", "USCA0987", "USWA0395",
-                "USWA0422", "USMO0787", "USFL0481", "USOK0537"
+                "USWA0422", "USMO0787", "USFL0481", "USOK0537", "USDC0001"
             };
         }
         else
