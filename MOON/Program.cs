@@ -22,11 +22,38 @@ public class Program
         Log.Info("Starting MOON...");
         
         Config config = Config.Load();
+        
+        if (args.Length > 0)
+        {
+            Log.Debug($"Arguments passed: {String.Join(",", args)}");
+            
+            foreach (string arg in args)
+            {
+                if (arg == "--national")
+                    Config.config.UseNationalLocations = true;
+
+                if (arg == "--config-path")
+                {
+                    var index = Array.IndexOf(args, arg);
+                    Config.ConfigPath = args[index + 1];
+
+                    config = Config.Load();
+                }
+                
+                if (arg == "--log-level")
+                {
+                    var index = Array.IndexOf(args, arg);
+                    Log.Debug($"{index}");
+
+                    Config.config.LogLevel = args[index + 1];
+                }
+            }
+        }
+        
         MqttDistributor.Connect();
         Log.SetLogLevel(config.LogLevel);
 
         string[] locations;
-        await Mist.GetActiveLocations();
         
         if (config.UseNationalLocations)
         {
@@ -45,6 +72,7 @@ public class Program
         }
         else
         {
+            await Mist.GetActiveLocations();
             locations = Mist.Locations;
         }
 
