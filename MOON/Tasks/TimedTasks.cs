@@ -94,6 +94,17 @@ public class TimedTasks
     /// <param name="generationInterval"></param>
     public static async Task HourlyRecordGenTask(string[] locations)
     {
+        string mqttTopic;
+
+        if (Config.config.UseNationalLocations)
+        {
+            mqttTopic = "i2m/national";
+        }
+        else
+        {
+            mqttTopic = "i2m/global";
+        }
+        
         while (true)
         {
             var currentTime = DateTime.Now;
@@ -123,7 +134,7 @@ public class TimedTasks
                 string obsRecord = await new CurrentObsRecord().MakeRecord(obs);
                 MqttDistributor.PublishFile(obsRecord,
                     "storeData(QGROUP=__CurrentObservations__,Feed=CurrentObservations)",
-                    "i2m/global");
+                    mqttTopic);
             }
 
             if (dataConfig.DailyForecast)
@@ -132,7 +143,7 @@ public class TimedTasks
                 string dfsRecord = await new DailyForecastRecord().MakeRecord(dfs);
                 MqttDistributor.PublishFile(dfsRecord,
                     "storeData(QGROUP=DailyForecast,Feed=DailyForecast)",
-                    "i2m/global");
+                    mqttTopic);
             }
 
             if (dataConfig.HourlyForecast)
@@ -141,7 +152,7 @@ public class TimedTasks
                 string hfsRecord = await new HourlyForecastRecord().MakeRecord(hfs);
                 MqttDistributor.PublishFile(hfsRecord,
                     "storeData(QGROUP=__HourlyForecast__,Feed=HourlyForecast)",
-                    "i2m/global");
+                    mqttTopic);
             }
 
             if (dataConfig.AirQuality)
@@ -150,7 +161,7 @@ public class TimedTasks
                 string aiqsRecord = await new AirQualityRecord().MakeRecord(aiqs);
                 MqttDistributor.PublishFile(aiqsRecord,
                     "storeData(QGROUP=__AirQuality__,Feed=AirQuality)",
-                    "i2m/global");
+                    mqttTopic);
             }
 
             if (dataConfig.PollenForecast)
@@ -159,7 +170,7 @@ public class TimedTasks
                 string pfsRecord = await new PollenRecord().MakeRecord(pfs);
                 MqttDistributor.PublishFile(pfsRecord,
                     "storeData(QGROUP=__PollenForecast__,Feed=PollenForecast)",
-                    "i2m/global");
+                    mqttTopic);
             }
 
             if (dataConfig.HeatingAndCooling)
@@ -168,7 +179,7 @@ public class TimedTasks
                 string hcsRecord = await new HeatingCoolingRecord().MakeRecord(hcs);
                 MqttDistributor.PublishFile(hcsRecord,
                     "storeData(QGROUP=__HeatingAndCooling__,Feed=HeatingAndCooling)",
-                    "i2m/global");
+                    mqttTopic);
             }
 
             if (dataConfig.AchesAndPains)
@@ -177,7 +188,7 @@ public class TimedTasks
                 string acpsRecord = await new AchesPainRecord().MakeRecord(acps);
                 MqttDistributor.PublishFile(acpsRecord,
                     "storeData(QGROUP=__AchesAndPains__,Feed=AchesAndPains)",
-                    "i2m/global");
+                    mqttTopic);
             }
 
             if (dataConfig.Breathing)
@@ -186,7 +197,7 @@ public class TimedTasks
                 string brsRecord = await new BreathingRecord().MakeRecord(brs);
                 MqttDistributor.PublishFile(brsRecord,
                     "storeData(QGROUP=__Breathing__,Feed=Breathing)",
-                    "i2m/global");
+                    mqttTopic);
             }
 
             if (Globals.FreshStart)
