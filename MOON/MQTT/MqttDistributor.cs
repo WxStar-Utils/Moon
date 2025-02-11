@@ -12,15 +12,25 @@ public class MqttDistributor
     private static int PORT = Config.config.Mqtt.Port;
     private static string USERNAME = Config.config.Mqtt.Username;
     private static string PASSWORD = Config.config.Mqtt.Password;
+    private static string CLIENT_ID;
 
     public static async Task Connect()
     {
         var factory = new MqttFactory();
         Factory = factory;
         Client = factory.CreateMqttClient();
+
+        if (Config.config.UseNationalLocations)
+        {
+            CLIENT_ID = "MOON_NATIONAL";
+        }
+        else
+        {
+            CLIENT_ID = "MOON";
+        }
         
         var clientOptions = new MqttClientOptionsBuilder()
-            .WithClientId("MOON")
+            .WithClientId(CLIENT_ID)
             .WithTcpServer(HOST, PORT)
             .WithCredentials(USERNAME, PASSWORD)
             .WithCleanSession()
