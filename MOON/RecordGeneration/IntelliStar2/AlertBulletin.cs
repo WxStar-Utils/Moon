@@ -183,7 +183,7 @@ public class AlertBulletin : I2Record
 
         if (alertDetails.Count < 1)
         {
-            return "<Data type=\"BERecord\"><BERecord></BERecord></Data";
+            return "<Data type=\"BERecord\"><BERecord></BERecord></Data>";
         }
 
         foreach (var details in alertDetails)
