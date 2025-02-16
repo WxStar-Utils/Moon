@@ -12,8 +12,8 @@ public class Config
     public static string ConfigPath { get; set; } = Path.Combine(AppContext.BaseDirectory, "config.xml");
 
     // Config Elements \\
-    
-    [XmlElement] public string TwcApiKey { get; set; } = "REPLACE_ME";
+
+    [XmlElement] public TwcApiKeysList TwcApiKeys { get; set; } = new();
     [XmlElement] public string WxNetToken { get; set; } = "REPLACE_ME";
     [XmlElement] public string LogLevel { get; set; } = "info";
     [XmlElement] public bool GetAlerts { get; set; } = true;
@@ -21,10 +21,10 @@ public class Config
     [XmlElement] public bool UseNationalLocations { get; set; } = false;
     [XmlElement] public int CheckAlertTimeSeconds { get; set; } = 600;      // Defaults to 10 minutes
 
-    [XmlElement("MQTTConfig")] public MqttConfig Mqtt { get; set; } = new MqttConfig();
+    [XmlElement("MQTTConfig")] public MqttConfig Mqtt { get; set; } = new();
 
-    [XmlElement("RadarConfig")] public RadarConfig RadarConfiguration { get; set; } = new RadarConfig();
-    [XmlElement("DataConfig")] public DataEndpointConfig DataConfig { get; set; } = new DataEndpointConfig();
+    [XmlElement("RadarConfig")] public RadarConfig RadarConfiguration { get; set; } = new();
+    [XmlElement("DataConfig")] public DataEndpointConfig DataConfig { get; set; } = new();
 
     // Actual configuration setup \\
     
@@ -71,6 +71,13 @@ public class Config
         
     }
 
+    [XmlRoot("TwcApiKeys")]
+    public class TwcApiKeysList
+    {
+        [XmlElement("Key")]
+        public List<string> Keys { get; set; } = new() {};
+    }
+    
     [XmlRoot("MQTTConfig")]
     public class MqttConfig
     {

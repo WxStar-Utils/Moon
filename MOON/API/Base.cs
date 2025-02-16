@@ -1,4 +1,5 @@
 using System.Data.SQLite;
+using System.Security.Cryptography.X509Certificates;
 using Dapper;
 using System.Text;
 using System.Text.Json;
@@ -13,7 +14,6 @@ namespace Moon.API;
 public class Base
 {
     protected HttpClient Client = new HttpClient();
-    protected string ApiKey = Config.config.TwcApiKey;
 
     protected string RecordName = String.Empty;
     protected string DataUrl = String.Empty;
@@ -81,11 +81,34 @@ public class Base
         return innerXml;
     }
 
+    /// <summary>
+    /// Randomizes which API key to use for the weather.com API to get around rate limiting.
+    /// </summary>
+    /// <returns>A TWC Api key as listed in the server's configuration file</returns>
+    public string RandomizeApiKey()
+    {
+        var keys = Config.config.TwcApiKeys.Keys;
+
+        if (keys.Count < 1)
+        {
+            return String.Empty;
+        }
+        
+        if (keys.Count == 1)
+        {
+            return keys[0];
+        }
+
+        var random = new Random();
+        int index = random.Next(keys.Count);
+        
+        return keys[index];
+    }
     
     public string FormatUrl(LFRecordLocation location)
     {
         string url = DataUrl;
-        url = url.Replace("{apiKey}", ApiKey);
+        url = url.Replace("{apiKey}", RandomizeApiKey());
 
         if (url.Contains("{lat}"))
         {
