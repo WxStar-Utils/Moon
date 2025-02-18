@@ -5,13 +5,13 @@ namespace Moon.Tasks;
 public partial class TimedTasks
 {
     /// <summary>
-    /// Publishes uptime notifications to the MQTT monitoring channels.
+    /// Publishes uptime notifications to the MQTT monitoring channels every 120 seconds.
     /// </summary>
     public static async Task RefreshUptime()
     {
-        while (!Globals.GracefulShutdown)
+        while (true)
         {
-            MqttDistributor.PublishUptime();
+            await MqttDistributor.PublishUptime();
             await Task.Delay(120 * 1000);
         }
     }
