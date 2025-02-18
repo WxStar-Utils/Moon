@@ -95,6 +95,7 @@ public class TimedTasks
     public static async Task HourlyRecordGenTask(string[] locations)
     {
         string mqttTopic;
+        var watch = System.Diagnostics.Stopwatch.StartNew();
 
         if (Config.config.UseNationalLocations)
         {
@@ -105,9 +106,12 @@ public class TimedTasks
             mqttTopic = "i2m/global";
         }
         
+        
         while (true)
         {
             var currentTime = DateTime.Now;
+            
+            watch.Restart();
             
             // Don't generate if we're not at the start of the hour 
             if (currentTime.Minute != 0 && !Globals.FreshStart)
@@ -204,6 +208,10 @@ public class TimedTasks
             {
                 Globals.FreshStart = false;
             }
+            
+            watch.Stop();
+            
+            Log.Info($"Generated hourly records in {watch.ElapsedMilliseconds} ms.");
             
             await Task.Delay(120 * 1000);
         }
