@@ -2,7 +2,7 @@ using Moon.API;
 
 namespace Moon.Tasks;
 
-public class ApiTasks
+public partial class TimedTasks
 {
     /// <summary>
     /// Grabs data refresh requests from the API every minute.

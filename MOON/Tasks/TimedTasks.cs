@@ -7,7 +7,7 @@ using Moon.Schema.ibm;
 
 namespace Moon.Tasks;
 
-public class TimedTasks
+public partial class TimedTasks
 {
     
     /// <summary>

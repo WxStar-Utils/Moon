@@ -82,7 +82,7 @@ public class Program
         Task clearAlertsCache = TimedTasks.ClearExpiredAlerts();
         
         // Mist API tasks
-        Task refreshLocations = ApiTasks.UpdateLocations();
+        Task refreshLocations = TimedTasks.UpdateLocations();
         
         await Task.WhenAll(
             checkAlerts, 
