@@ -8,6 +8,12 @@ public static class Globals
     /// Flag used to determine whether or not to perform data collection on startup
     /// </summary>
     public static bool FreshStart = true;
+
+    /// <summary>
+    /// Flag for when the server has been stopped. Turned to true to properly dispose of everything and close opened
+    /// files.
+    /// </summary>
+    public static bool GracefulShutdown = false;
     
     /// <summary>
     /// Memory cache for storing LFRecord objects
