@@ -4,7 +4,7 @@ using MQTTnet.Client;
 
 namespace Moon.MQTT;
 
-public class MqttDistributor
+public partial class MqttDistributor
 {
     public static IMqttClient Client;
     public static MqttFactory Factory;
@@ -39,6 +39,11 @@ public class MqttDistributor
 
         await Client.ConnectAsync(clientOptions, CancellationToken.None);
         Log.Info($"Connected to Mqtt Broker {HOST}:{PORT}");
+    }
+
+    public static async Task Disconnect()
+    {
+        await Client.DisconnectAsync();
     }
 
     public static async Task PublishFile(string fileData, string command, string topic)

@@ -18,7 +18,7 @@ internal class Log
     private static Color COLOR_INFO = Color.Azure;
 
     private static LogLevel LOG_LEVEL = LogLevel.Debug;
-    private static string LOG_START_DATE = DateTime.Now.ToString("MMddyyyy-HH_mm_ss");
+    public static string LOG_START_DATE = DateTime.Now.ToString("MMddyyyy-HH_mm_ss");
 
     private static string GetCurrentTime()
     {
