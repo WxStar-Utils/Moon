@@ -12,22 +12,13 @@ public partial class MqttDistributor
     private static int PORT = Config.config.Mqtt.Port;
     private static string USERNAME = Config.config.Mqtt.Username;
     private static string PASSWORD = Config.config.Mqtt.Password;
-    private static string CLIENT_ID;
+    private static string CLIENT_ID = $"MOON_{Guid.NewGuid()}";
 
     public static async Task Connect()
     {
         var factory = new MqttFactory();
         Factory = factory;
         Client = factory.CreateMqttClient();
-
-        if (Config.config.UseNationalLocations)
-        {
-            CLIENT_ID = "MOON_NATIONAL";
-        }
-        else
-        {
-            CLIENT_ID = "MOON";
-        }
         
         var clientOptions = new MqttClientOptionsBuilder()
             .WithClientId(CLIENT_ID)
@@ -38,7 +29,7 @@ public partial class MqttDistributor
 
 
         await Client.ConnectAsync(clientOptions, CancellationToken.None);
-        Log.Info($"Connected to Mqtt Broker {HOST}:{PORT}");
+        Log.Info($"Connected to MQTT Broker as {CLIENT_ID}");
     }
 
     public static async Task Disconnect()
