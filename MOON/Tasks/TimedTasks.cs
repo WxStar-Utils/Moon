@@ -97,16 +97,16 @@ public partial class TimedTasks
         string mqttTopic;
         var watch = System.Diagnostics.Stopwatch.StartNew();
 
-        if (Config.config.UseNationalLocations)
+        switch (Config.config.UseNationalLocations)
         {
-            mqttTopic = "i2m/national";
+            case true:
+                mqttTopic = "i2m/national";
+                break;
+            case false:
+                mqttTopic = "i2m/global";
+                break;
         }
-        else
-        {
-            mqttTopic = "i2m/global";
-        }
-        
-        
+
         while (true)
         {
             var currentTime = DateTime.Now;
@@ -123,87 +123,9 @@ public partial class TimedTasks
             Config.DataEndpointConfig dataConfig = Config.config.DataConfig;
             
             Log.Info("Running hourly record collection");
+
+            Publisher.PublishI2MRecords(locations, mqttTopic);
             
-            // TODO: This could probably be a better system, but this is the simplest implementation for this for the
-            //       time being. Maybe a dictionary system for the records instead of making them all their own object?
-            //       Would make really good use of the base DataType variable.
-            
-            
-            // Implements suggestion #3 in the issue tracker.
-            
-            if (dataConfig.CurrentConditions)
-            {
-                List<GenericResponse<CurrentObservationsResponse>> obs =
-                    await new CurrentObservationsProduct().Populate(locations);
-                string obsRecord = await new CurrentObsRecord().MakeRecord(obs);
-                MqttDistributor.PublishFile(obsRecord,
-                    "storeData(QGROUP=__CurrentObservations__,Feed=CurrentObservations)",
-                    mqttTopic);
-            }
-
-            if (dataConfig.DailyForecast)
-            {
-                List<GenericResponse<DailyForecastResponse>> dfs = await new DailyForecastProduct().Populate(locations);
-                string dfsRecord = await new DailyForecastRecord().MakeRecord(dfs);
-                MqttDistributor.PublishFile(dfsRecord,
-                    "storeData(QGROUP=DailyForecast,Feed=DailyForecast)",
-                    mqttTopic);
-            }
-
-            if (dataConfig.HourlyForecast)
-            {
-                List<GenericResponse<HourlyForecastResponse>> hfs = await new HourlyForecastProduct().Populate(locations);
-                string hfsRecord = await new HourlyForecastRecord().MakeRecord(hfs);
-                MqttDistributor.PublishFile(hfsRecord,
-                    "storeData(QGROUP=__HourlyForecast__,Feed=HourlyForecast)",
-                    mqttTopic);
-            }
-
-            if (dataConfig.AirQuality)
-            {
-                List<GenericResponse<AirQualityResponse>> aiqs = await new AirQualityProduct().Populate(locations);
-                string aiqsRecord = await new AirQualityRecord().MakeRecord(aiqs);
-                MqttDistributor.PublishFile(aiqsRecord,
-                    "storeData(QGROUP=__AirQuality__,Feed=AirQuality)",
-                    mqttTopic);
-            }
-
-            if (dataConfig.PollenForecast)
-            {
-                List<GenericResponse<PollenResponse>> pfs = await new PollenForecastProduct().Populate(locations);
-                string pfsRecord = await new PollenRecord().MakeRecord(pfs);
-                MqttDistributor.PublishFile(pfsRecord,
-                    "storeData(QGROUP=__PollenForecast__,Feed=PollenForecast)",
-                    mqttTopic);
-            }
-
-            if (dataConfig.HeatingAndCooling)
-            {
-                List<GenericResponse<HeatingCoolingResponse>> hcs = await new HeatingCoolingProduct().Populate(locations);
-                string hcsRecord = await new HeatingCoolingRecord().MakeRecord(hcs);
-                MqttDistributor.PublishFile(hcsRecord,
-                    "storeData(QGROUP=__HeatingAndCooling__,Feed=HeatingAndCooling)",
-                    mqttTopic);
-            }
-
-            if (dataConfig.AchesAndPains)
-            {
-                List<GenericResponse<AchesPainResponse>> acps = await new AchesPainProduct().Populate(locations);
-                string acpsRecord = await new AchesPainRecord().MakeRecord(acps);
-                MqttDistributor.PublishFile(acpsRecord,
-                    "storeData(QGROUP=__AchesAndPains__,Feed=AchesAndPains)",
-                    mqttTopic);
-            }
-
-            if (dataConfig.Breathing)
-            {
-                List<GenericResponse<BreathingResponse>> brs = await new BreathingProduct().Populate(locations);
-                string brsRecord = await new BreathingRecord().MakeRecord(brs);
-                MqttDistributor.PublishFile(brsRecord,
-                    "storeData(QGROUP=__Breathing__,Feed=Breathing)",
-                    mqttTopic);
-            }
-
             if (Globals.FreshStart)
             {
                 Globals.FreshStart = false;
