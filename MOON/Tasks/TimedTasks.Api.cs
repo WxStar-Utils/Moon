@@ -15,7 +15,7 @@ public partial class TimedTasks
     }
 
     /// <summary>
-    /// Updates the current lists of applications and cleans up the ones that are not currently online/connected.
+    /// Updates the list of currently active location codes for all units connected to the API.
     /// </summary>
     public static async Task UpdateLocations()
     {
