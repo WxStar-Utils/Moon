@@ -1,0 +1,2 @@
+# Init scripts for MOON Server / National Data
+These are scripts for different init systems for running MOON as a Linux service. These unit files assume you are running the recommended installation layout.

@@ -1,0 +1,11 @@
+[Unit]
+Description=Data aggregation server for WeatherSTAR units. (National Data)
+After=wxnet-api.service
+
+[Service]
+ExecStart=/usr/local/bin/moon --national
+User=mist
+Group=mist
+
+[Install]
+WantedBy=multi-user.target
