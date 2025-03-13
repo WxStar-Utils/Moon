@@ -1,4 +1,7 @@
 using System.Collections.Immutable;
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using Moon.Schema;
 using MQTTnet;
 using MQTTnet.Client;
 
@@ -40,9 +43,15 @@ public partial class MqttDistributor
 
     public static async Task PublishFile(string fileData, string command, string topic)
     {
+        MqttCommand mqttCommand = new MqttCommand()
+        {
+            Data = fileData,
+            Command = command
+        };
+        
         var applicationMessage = new MqttApplicationMessageBuilder()
             .WithTopic(topic)
-            .WithPayload("{\"data\": \"" + fileData.Replace("\"", "\'") + "\", \"cmd\": \"" + command + "\"}")
+            .WithPayload(JsonSerializer.Serialize(mqttCommand))
             .Build();
         await Client.PublishAsync(applicationMessage, CancellationToken.None);
             
