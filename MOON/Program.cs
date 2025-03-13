@@ -29,10 +29,10 @@ public class Program
             
             foreach (string arg in args)
             {
-                if (arg == "--national")
+                if (arg == "--national" || arg == "-n")
                     Config.config.UseNationalLocations = true;
 
-                if (arg == "--config-path")
+                if (arg == "--config" || arg == "-c")
                 {
                     var index = Array.IndexOf(args, arg);
                     Config.ConfigPath = args[index + 1];
@@ -40,10 +40,9 @@ public class Program
                     config = Config.Load();
                 }
                 
-                if (arg == "--log-level")
+                if (arg == "--log-level" || arg == "-l")
                 {
                     var index = Array.IndexOf(args, arg);
-                    Log.Debug($"{index}");
 
                     Config.config.LogLevel = args[index + 1];
                 }
