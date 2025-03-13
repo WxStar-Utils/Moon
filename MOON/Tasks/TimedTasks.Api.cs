@@ -1,4 +1,6 @@
+using System.Reflection.Metadata.Ecma335;
 using Moon.API;
+using Moon.Schema.System;
 
 namespace Moon.Tasks;
 
@@ -30,7 +32,7 @@ public partial class TimedTasks
 
             await Mist.GetActiveLocations();
 
-            await Task.Delay(1800 * 1000);    // Checks every 30 minutes by default.
+            await Task.Delay(300 * 1000);    // Checks every 5 minutes.
         }
     }
 }
