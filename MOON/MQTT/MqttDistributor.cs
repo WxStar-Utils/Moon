@@ -29,6 +29,7 @@ public partial class MqttDistributor
 
 
         await Client.ConnectAsync(clientOptions, CancellationToken.None);
+        
         Log.Info($"Connected to MQTT Broker as {CLIENT_ID}");
     }
 

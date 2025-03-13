@@ -50,6 +50,16 @@ public class Program
         }
         
         MqttDistributor.Connect();
+
+        await Task.Delay(3 * 1000);
+        if (!MqttDistributor.Client.IsConnected)
+        {
+            Log.Error("Failed to connect to the MQTT Broker.");
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadKey();
+            return;
+        }
+        
         Log.SetLogLevel(config.LogLevel);
 
         string[] locations;
