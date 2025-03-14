@@ -14,7 +14,7 @@ public class Mist
     public static async Task<string[]> GetActiveLocations()
     {
         var response = await Client.GetAsync(
-            "http://wxnet.bli.overcastsystems.org/internal/moon/unit/locations?unit_type=i2");
+            $"{Config.config.WxNetEndpoint}/internal/moon/unit/locations?unit_type=i2");
 
         response.EnsureSuccessStatusCode();
         string responseBody = await response.Content.ReadAsStringAsync();

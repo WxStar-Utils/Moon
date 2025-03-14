@@ -14,6 +14,7 @@ public class Config
     // Config Elements \\
 
     [XmlElement] public TwcApiKeysList TwcApiKeys { get; set; } = new();
+    [XmlElement] public string WxNetEndpoint { get; set; } = "https://wxnet.overcastsystems.org";
     [XmlElement] public string WxNetToken { get; set; } = "REPLACE_ME";
     [XmlElement] public string LogLevel { get; set; } = "info";
     [XmlElement] public bool GetAlerts { get; set; } = true;
