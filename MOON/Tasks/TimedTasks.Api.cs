@@ -63,7 +63,7 @@ public partial class TimedTasks
         {
             await Mist.SendUptimeNotification();
 
-            Task.Delay(60 * 1000);
+            await Task.Delay(60 * 1000);
         }
     }
 }
