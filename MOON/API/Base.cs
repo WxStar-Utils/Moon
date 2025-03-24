@@ -31,23 +31,8 @@ public class Base
         try
         {
             HttpResponseMessage response = await Client.GetAsync(url);
-            // response.EnsureSuccessStatusCode();
-
-            Log.Debug(response.StatusCode.ToString());
-
-            if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
-            {
-                Log.Debug("Bad Request issue!");
-
-                return String.Empty;
-            }
+            response.EnsureSuccessStatusCode();
             
-            if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
-            {
-                return String.Empty;
-            }
-
-
             byte[] content = await Client.GetByteArrayAsync(url);
             string contentString = Encoding.UTF8.GetString(content);
 
