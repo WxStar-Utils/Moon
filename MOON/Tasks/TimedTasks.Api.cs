@@ -7,15 +7,7 @@ namespace Moon.Tasks;
 
 public partial class TimedTasks
 {
-    /// <summary>
-    /// Grabs data refresh requests from the API every minute.
-    /// Also processes the process of distributing data refreshes and cleaning them up from the API.
-    /// </summary>
-    public static async Task CheckRequests()
-    {
-        // TODO:
-        return;
-    }
+
 
     /// <summary>
     /// Updates the list of currently active location codes for all units connected to the API.
