@@ -1,4 +1,6 @@
 using System.Text.Json;
+using System.Text.Json.Serialization;
+using Moon.MQTT;
 
 namespace Moon.API;
 
@@ -47,12 +49,40 @@ public class Mist
         MistLocationsResponse locationsResponse = JsonSerializer.
             Deserialize<MistLocationsResponse>(responseBody);
 
-        Locations = locationsResponse.locations.ToArray();
+        Locations = locationsResponse.Locations.ToArray();
         return Locations;
+    }
+
+    /// <summary>
+    /// Sends a POST request to the /status/update endpoint in the API
+    /// </summary>
+    public static async Task SendUptimeNotification()
+    {
+        var uptimeNotification = new UptimeNotification()
+        {
+            ProcessName = MqttDistributor.Client.Options.ClientId,
+            CurrentStatus = "UP"
+        };
+        var uptimeNotificationJson = JsonSerializer.Serialize(uptimeNotification);
+        var buffer = System.Text.Encoding.UTF8.GetBytes(uptimeNotificationJson);
+        var byteContent = new ByteArrayContent(buffer);
+        
+        byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+        
+        var postRequest = await Client.PostAsync(
+            $"{Config.config.WxNetEndpoint}/status/update", byteContent);
+        
     }
 }
 
 public class MistLocationsResponse
 {
-    public List<string> locations { get; set; }
+    [JsonPropertyName("locations")] public List<string> Locations { get; set; }
+}
+
+public class UptimeNotification
+{
+    [JsonPropertyName("process_name")] public string ProcessName { get; set; }
+    [JsonPropertyName("current_status")] public string CurrentStatus { get; set; }
+    [JsonPropertyName("stats")] public string? Stats { get; set; } = null;
 }

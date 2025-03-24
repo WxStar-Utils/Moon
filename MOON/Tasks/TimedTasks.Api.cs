@@ -7,8 +7,6 @@ namespace Moon.Tasks;
 
 public partial class TimedTasks
 {
-
-
     /// <summary>
     /// Updates the list of currently active location codes for all units connected to the API.
     /// </summary>
@@ -54,5 +52,18 @@ public partial class TimedTasks
         Publisher.PublishI2MRecords(newLocations.ToArray(), "i2m/global");
         
         Log.Info("Data has been sent out for all newly added locations.");
+    }
+
+    /// <summary>
+    /// Sends out uptime notifications to the API.
+    /// </summary>
+    public static async Task SendUptimeNotifications()
+    {
+        while (true)
+        {
+            await Mist.SendUptimeNotification();
+
+            Task.Delay(60 * 1000);
+        }
     }
 }
