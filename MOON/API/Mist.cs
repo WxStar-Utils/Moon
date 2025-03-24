@@ -52,7 +52,7 @@ public class Mist
         Locations = locationsResponse.Locations.ToArray();
         return Locations;
     }
-
+    
     /// <summary>
     /// Sends a POST request to the /status/update endpoint in the API
     /// </summary>
