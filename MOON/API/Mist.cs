@@ -84,5 +84,5 @@ public class UptimeNotification
 {
     [JsonPropertyName("process_name")] public string ProcessName { get; set; }
     [JsonPropertyName("current_status")] public string CurrentStatus { get; set; }
-    [JsonPropertyName("stats")] public string? Stats { get; set; } = null;
+    [JsonPropertyName("stats")] public Object? Stats { get; set; } = null;
 }

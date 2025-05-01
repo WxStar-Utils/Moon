@@ -49,7 +49,7 @@ public partial class TimedTasks
         Log.Info($"The following locations have been added to the database:");
         Log.Info(string.Join(",", newLocations));
 
-        Publisher.PublishI2MRecords(newLocations.ToArray(), "i2m/global");
+        await Publisher.PublishI2MRecords(newLocations.ToArray(), "i2m/global");
         
         Log.Info("Data has been sent out for all newly added locations.");
     }
