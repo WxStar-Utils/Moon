@@ -120,8 +120,6 @@ public partial class TimedTasks
                 continue;
             }
             
-            Config.DataEndpointConfig dataConfig = Config.config.DataConfig;
-            
             Log.Info("Running hourly record collection");
 
             await Publisher.PublishI2MRecords(locations, mqttTopic);
