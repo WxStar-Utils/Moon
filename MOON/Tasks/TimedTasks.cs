@@ -14,7 +14,7 @@ public partial class TimedTasks
     /// Checks every 10 minutes for new alerts in the unit's area.
     /// </summary>
     /// <param name="locations">Array of location IDs</param>
-    /// <param name="sender">UdpSender, prefer priority port</param>
+    /// <param name="checkInterval">Interval to check for new alerts in seconds</param>
     public static async Task CheckForAlerts(string[] locations, int checkInterval)
     {
         if (Config.config.UseNationalLocations || !Config.config.GetAlerts)
@@ -28,7 +28,7 @@ public partial class TimedTasks
             Log.Info("Checking for new alerts..");
             List<GenericResponse<HeadlineResponse>> headlines = await new AlertHeadlinesProduct().Populate(locations);
 
-            if (headlines == null || headlines.Count == 0)
+            if (headlines.Count == 0)
             {
                 Log.Info("No new alerts found.");
                 await Task.Delay(checkInterval * 1000);
@@ -41,7 +41,7 @@ public partial class TimedTasks
 
             Log.Debug(bulletinRecord);
             
-            MqttDistributor.PublishFile(
+            await MqttDistributor.PublishFile(
                 bulletinRecord, 
                 "storeData(QGROUP=__BERecord__,Feed=BERecord)",
                 "i2m/urgent");
@@ -91,7 +91,6 @@ public partial class TimedTasks
     /// Generates all data for units regardless of type. 
     /// </summary>
     /// <param name="locations"></param>
-    /// <param name="generationInterval"></param>
     public static async Task HourlyRecordGenTask(string[] locations)
     {
         string mqttTopic;
