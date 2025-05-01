@@ -43,8 +43,8 @@ public class Program
             }
         }
 
-        Mist.InitWxnetApi();
-        MqttDistributor.Connect();
+        await Mist.InitWxnetApi();
+        await MqttDistributor.Connect();
 
         await Task.Delay(1 * 1000);
         if (!MqttDistributor.Client.IsConnected)
