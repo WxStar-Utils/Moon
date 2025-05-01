@@ -4,7 +4,7 @@ using Moon.MQTT;
 
 namespace Moon.API;
 
-public class Mist
+public class MistApi
 {
     private static readonly HttpClient Client = new HttpClient();
     public static string[] Locations = { };
@@ -13,7 +13,7 @@ public class Mist
     /// Checks connectivity with the configured WXNet API endpoint, and sets the configured API token for use in
     /// requests to the backend.
     /// </summary>
-    public static async Task InitWxnetApi()
+    public static async Task Init()
     {
         try
         {

@@ -49,6 +49,12 @@ internal class Log
         WriteLogToFile(str);
     }
     
+    // TODO: Error/Warning logs could actually be used to post information in various text chats (Discord, Matrix..)
+    //       in the event that we want to start logging that sort of thing. However, it might also be a good idea to
+    //       try and utilize the concept of MultiLog on CIRRUS with the rest of the server software? Downside is that
+    //       this might make a single point of failure, so it could be good to make MultiLog a library instead of a 
+    //       server that handles it all. ~ April
+    
     public static void Error(string str)
     {
         if (LOG_LEVEL > LogLevel.Warning) return;

@@ -43,7 +43,7 @@ public class Program
             }
         }
 
-        await Mist.InitWxnetApi();
+        await MistApi.Init();
         await MqttDistributor.Connect();
 
         await Task.Delay(1 * 1000);
@@ -76,8 +76,8 @@ public class Program
         }
         else
         {
-            await Mist.GetActiveLocations();
-            locations = Mist.Locations;
+            await MistApi.GetActiveLocations();
+            locations = MistApi.Locations;
         }
         
         Log.Info("Initialization complete!");
