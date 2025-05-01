@@ -22,7 +22,7 @@ public static class Publisher
             List<GenericResponse<CurrentObservationsResponse>> obs =
                 await new CurrentObservationsProduct().Populate(locations);
             string obsRecord = await new CurrentObsRecord().MakeRecord(obs);
-            MqttDistributor.PublishFile(obsRecord,
+            await MqttDistributor.PublishFile(obsRecord,
                 "storeData(QGROUP=__CurrentObservations__,Feed=CurrentObservations)",
                 mqttTopic);
         }
@@ -31,7 +31,7 @@ public static class Publisher
         {
             List<GenericResponse<DailyForecastResponse>> dfs = await new DailyForecastProduct().Populate(locations);
             string dfsRecord = await new DailyForecastRecord().MakeRecord(dfs);
-            MqttDistributor.PublishFile(dfsRecord,
+            await MqttDistributor.PublishFile(dfsRecord,
                 "storeData(QGROUP=DailyForecast,Feed=DailyForecast)",
                 mqttTopic);
         }
@@ -40,7 +40,7 @@ public static class Publisher
         {
             List<GenericResponse<HourlyForecastResponse>> hfs = await new HourlyForecastProduct().Populate(locations);
             string hfsRecord = await new HourlyForecastRecord().MakeRecord(hfs);
-            MqttDistributor.PublishFile(hfsRecord,
+            await MqttDistributor.PublishFile(hfsRecord,
                 "storeData(QGROUP=__HourlyForecast__,Feed=HourlyForecast)",
                 mqttTopic);
         }
@@ -49,7 +49,7 @@ public static class Publisher
         {
             List<GenericResponse<AirQualityResponse>> aiqs = await new AirQualityProduct().Populate(locations);
             string aiqsRecord = await new AirQualityRecord().MakeRecord(aiqs);
-            MqttDistributor.PublishFile(aiqsRecord,
+            await MqttDistributor.PublishFile(aiqsRecord,
                 "storeData(QGROUP=__AirQuality__,Feed=AirQuality)",
                 mqttTopic);
         }
@@ -58,7 +58,7 @@ public static class Publisher
         {
             List<GenericResponse<PollenResponse>> pfs = await new PollenForecastProduct().Populate(locations);
             string pfsRecord = await new PollenRecord().MakeRecord(pfs);
-            MqttDistributor.PublishFile(pfsRecord,
+            await MqttDistributor.PublishFile(pfsRecord,
                 "storeData(QGROUP=__PollenForecast__,Feed=PollenForecast)",
                 mqttTopic);
         }
@@ -67,7 +67,7 @@ public static class Publisher
         {
             List<GenericResponse<HeatingCoolingResponse>> hcs = await new HeatingCoolingProduct().Populate(locations);
             string hcsRecord = await new HeatingCoolingRecord().MakeRecord(hcs);
-            MqttDistributor.PublishFile(hcsRecord,
+            await MqttDistributor.PublishFile(hcsRecord,
                 "storeData(QGROUP=__HeatingAndCooling__,Feed=HeatingAndCooling)",
                 mqttTopic);
         }
@@ -76,7 +76,7 @@ public static class Publisher
         {
             List<GenericResponse<AchesPainResponse>> acps = await new AchesPainProduct().Populate(locations);
             string acpsRecord = await new AchesPainRecord().MakeRecord(acps);
-            MqttDistributor.PublishFile(acpsRecord,
+            await MqttDistributor.PublishFile(acpsRecord,
                 "storeData(QGROUP=__AchesAndPains__,Feed=AchesAndPains)",
                 mqttTopic);
         }
@@ -85,7 +85,7 @@ public static class Publisher
         {
             List<GenericResponse<BreathingResponse>> brs = await new BreathingProduct().Populate(locations);
             string brsRecord = await new BreathingRecord().MakeRecord(brs);
-            MqttDistributor.PublishFile(brsRecord,
+            await MqttDistributor.PublishFile(brsRecord,
                 "storeData(QGROUP=__Breathing__,Feed=Breathing)",
                 mqttTopic);
         }
