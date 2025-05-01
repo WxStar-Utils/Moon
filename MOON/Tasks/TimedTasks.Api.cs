@@ -28,7 +28,7 @@ public partial class TimedTasks
     }
 
     /// <summary>
-    /// Compares current active locations to the existing locations cache, and sends out data for newly added location
+    /// Compares current active locations to the existing locations cache and sends out data for newly added location
     /// keys.
     /// </summary>
     private static async Task SendNewUnitData()
