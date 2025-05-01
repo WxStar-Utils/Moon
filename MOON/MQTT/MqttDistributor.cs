@@ -59,16 +59,4 @@ public partial class MqttDistributor
         Log.Debug($"Command Sent to {topic}: {command}");
         
     }
-
-    public static async Task PublishCommand(string command, string topic)
-    {
-        var applicationMessage = new MqttApplicationMessageBuilder()
-            .WithTopic(topic)
-            .WithPayload("{\"cmd\": \"" + command + "\"}")
-            .Build();
-
-        await Client.PublishAsync(applicationMessage, CancellationToken.None);
-            
-        Log.Info($"Command sent to topic {topic}");
-    }
 }
