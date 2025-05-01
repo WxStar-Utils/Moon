@@ -124,7 +124,7 @@ public partial class TimedTasks
             
             Log.Info("Running hourly record collection");
 
-            Publisher.PublishI2MRecords(locations, mqttTopic);
+            await Publisher.PublishI2MRecords(locations, mqttTopic);
             
             if (Globals.FreshStart)
             {
@@ -134,16 +134,6 @@ public partial class TimedTasks
             watch.Stop();
             
             Log.Info($"Generated hourly records in {watch.ElapsedMilliseconds} ms.");
-
-            var successMessage = new RecordGenMessage()
-            {
-                TimeGenerated = DateTime.Now.ToString("s"),
-                TimeTakenSeconds = watch.ElapsedMilliseconds / 1000,
-                LocationCount = locations.Length,
-                NationalData = Config.config.UseNationalLocations
-            };
-
-            await MqttDistributor.PublishRecordGenSuccess(successMessage);
             
             await Task.Delay(120 * 1000);
         }
