@@ -4,7 +4,7 @@ using Moon.MQTT;
 
 namespace Moon.API.WXStarManager;
 
-public partial class StarApi
+public class StarApi
 {
     private static readonly HttpClient Client = new HttpClient();
     public static string[] Locations = { };
