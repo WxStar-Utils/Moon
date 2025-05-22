@@ -2,9 +2,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Moon.MQTT;
 
-namespace Moon.API;
+namespace Moon.API.WXStarManager;
 
-public class StarApi
+public partial class StarApi
 {
     private static readonly HttpClient Client = new HttpClient();
     public static string[] Locations = { };
@@ -73,16 +73,4 @@ public class StarApi
             $"{Config.config.StarApiEndpoint}/status/update", byteContent);
         
     }
-}
-
-public class MistLocationsResponse
-{
-    [JsonPropertyName("locations")] public List<string> Locations { get; set; }
-}
-
-public class UptimeNotification
-{
-    [JsonPropertyName("process_name")] public string ProcessName { get; set; }
-    [JsonPropertyName("current_status")] public string CurrentStatus { get; set; }
-    [JsonPropertyName("stats")] public Object? Stats { get; set; } = null;
 }

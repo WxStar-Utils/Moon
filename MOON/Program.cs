@@ -1,5 +1,5 @@
 ﻿using Moon;
-using Moon.API;
+using Moon.API.WXStarManager;
 using Moon.MQTT;
 using Moon.Tasks;
 

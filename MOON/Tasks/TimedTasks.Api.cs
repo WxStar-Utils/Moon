@@ -1,5 +1,5 @@
 using System.Reflection.Metadata.Ecma335;
-using Moon.API;
+using Moon.API.WXStarManager;
 using Moon.RecordGeneration;
 using Moon.Schema.System;
 
