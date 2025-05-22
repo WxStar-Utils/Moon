@@ -18,11 +18,11 @@ public class StarApi
         try
         {
             var response = await Client.GetAsync(
-                $"{Config.config.WxNetEndpoint}/up");
+                $"{Config.config.StarApiEndpoint}/up");
 
             response.EnsureSuccessStatusCode();
             
-            Client.DefaultRequestHeaders.Add("X-WXNet-Key", Config.config.WxNetToken);
+            Client.DefaultRequestHeaders.Add("X-WXNet-Key", Config.config.StarApiToken);
             
             Log.Info("WXNet API is up!");
         }
@@ -41,7 +41,7 @@ public class StarApi
     public static async Task<string[]> GetActiveLocations()
     {
         var response = await Client.GetAsync(
-            $"{Config.config.WxNetEndpoint}/moon/get_loc_ids?unit_type=i2");
+            $"{Config.config.StarApiEndpoint}/moon/get_loc_ids?unit_type=i2");
 
         response.EnsureSuccessStatusCode();
         string responseBody = await response.Content.ReadAsStringAsync();
@@ -70,7 +70,7 @@ public class StarApi
         byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
         
         var postRequest = await Client.PostAsync(
-            $"{Config.config.WxNetEndpoint}/status/update", byteContent);
+            $"{Config.config.StarApiEndpoint}/status/update", byteContent);
         
     }
 }
