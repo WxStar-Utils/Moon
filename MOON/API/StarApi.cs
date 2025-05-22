@@ -4,7 +4,7 @@ using Moon.MQTT;
 
 namespace Moon.API;
 
-public class MistApi
+public class StarApi
 {
     private static readonly HttpClient Client = new HttpClient();
     public static string[] Locations = { };

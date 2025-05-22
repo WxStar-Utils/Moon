@@ -21,7 +21,7 @@ public partial class TimedTasks
         {
             Log.Info("Refreshing Mist locations cache.");
 
-            await MistApi.GetActiveLocations();
+            await StarApi.GetActiveLocations();
             await SendNewUnitData();
             await Task.Delay(300 * 1000);    // Checks every 5 minutes.
         }
@@ -35,7 +35,7 @@ public partial class TimedTasks
     {
         List<string> newLocations = new List<string>();
         
-        foreach (string location in MistApi.Locations)
+        foreach (string location in StarApi.Locations)
         {
             // Check the current locations cache to see if these are actually new locations
             if (Globals.LocationCache.TryGetValue(location, out var locationData))
@@ -61,7 +61,7 @@ public partial class TimedTasks
     {
         while (true)
         {
-            await MistApi.SendUptimeNotification();
+            await StarApi.SendUptimeNotification();
 
             await Task.Delay(60 * 1000);
         }
