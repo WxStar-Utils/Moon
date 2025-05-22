@@ -24,11 +24,11 @@ public class StarApi
             
             Client.DefaultRequestHeaders.Add("X-WXNet-Key", Config.config.StarApiToken);
             
-            Log.Info("WXNet API is up!");
+            Log.Info("STAR API is up!");
         }
         catch (HttpRequestException e)
         {
-            Log.Error("The WXNet API is not currently up.");
+            Log.Error("The STAR API is not currently up.");
             Log.Error("Contact system administrator when possible.");
             throw;
         }
