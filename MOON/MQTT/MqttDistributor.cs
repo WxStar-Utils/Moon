@@ -1,13 +1,11 @@
-using System.Collections.Immutable;
 using System.Text.Json;
-using System.Text.Json.Nodes;
 using Moon.Schema;
 using MQTTnet;
 using MQTTnet.Client;
 
 namespace Moon.MQTT;
 
-public partial class MqttDistributor
+public class MqttDistributor
 {
     public static IMqttClient Client;
     public static MqttFactory Factory;
