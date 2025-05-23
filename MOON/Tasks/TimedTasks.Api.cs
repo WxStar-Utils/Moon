@@ -21,7 +21,7 @@ public partial class TimedTasks
         {
             Log.Info("Refreshing Mist locations cache.");
 
-            await StarApi.GetActiveLocations();
+            await StarApi.GetActiveLocations(StarModels.IntelliStar2);
             await SendNewUnitData();
             await Task.Delay(300 * 1000);    // Checks every 5 minutes.
         }
@@ -61,7 +61,7 @@ public partial class TimedTasks
     {
         while (true)
         {
-            await StarApi.SendUptimeNotification();
+            Log.Info("Aha i sure hope we're updating the uptime notif");
 
             await Task.Delay(60 * 1000);
         }

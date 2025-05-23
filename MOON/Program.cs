@@ -76,7 +76,7 @@ public class Program
         }
         else
         {
-            await StarApi.GetActiveLocations();
+            await StarApi.GetActiveLocations(StarModels.IntelliStar2);
             locations = StarApi.Locations;
         }
         
