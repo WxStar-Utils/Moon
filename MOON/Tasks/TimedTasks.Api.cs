@@ -61,7 +61,7 @@ public partial class TimedTasks
     {
         while (true)
         {
-            Log.Info("Aha i sure hope we're updating the uptime notif");
+            await StarApi.SendUptimeReport();
 
             await Task.Delay(60 * 1000);
         }
