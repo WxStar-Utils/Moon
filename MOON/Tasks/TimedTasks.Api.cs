@@ -19,7 +19,7 @@ public partial class TimedTasks
         
         while (true)
         {
-            Log.Info("Refreshing Mist locations cache.");
+            Log.Info("Refreshing locations cache.");
 
             await StarApi.GetActiveLocations(StarModels.IntelliStar2);
             await SendNewUnitData();

@@ -29,7 +29,7 @@ public class StarApi
             }
             
             Log.Error("An error occurred while connecting to the WXStarManager API");
-            return;
+            throw new Exception("Unable to continue initialization.");
         }
         
         await RegisterSystemService();
@@ -96,6 +96,7 @@ public class StarApi
         try
         {
             var uptimeReport = new ServiceUptimeReport();
+            uptimeReport.UptimeTimestamp = DateTime.UtcNow;
             var serviceUuid = await File.ReadAllTextAsync("service-uuid");
 
             var response = await Client.PutAsJsonAsync(

@@ -89,13 +89,15 @@ public class Program
         
         // Mist API tasks
         Task refreshLocations = TimedTasks.UpdateLocations();
+        Task uptimeNotifications = TimedTasks.SendUptimeNotifications();
         
         
         await Task.WhenAll(
             checkAlerts, 
             recordGenTask, 
             clearAlertsCache,
-            refreshLocations);
+            refreshLocations,
+            uptimeNotifications);
 
     }
 }
