@@ -24,6 +24,7 @@ public class StarApi
             response.EnsureSuccessStatusCode();
 
             await RegisterSystemService();
+            await SendUptimeReport();
             
             Log.Info("STAR API is up!");
         }
@@ -99,7 +100,23 @@ public class StarApi
     /// </summary>
     public static async Task SendUptimeReport()
     {
-        
+        try
+        {
+            var uptimeReport = new ServiceUptimeReport();
+            var serviceUuid = await File.ReadAllTextAsync("service-uuid");
+
+            var response = await Client.PutAsJsonAsync(
+                $"{Config.config.StarApiEndpoint}/services/report_up?service_uuid={serviceUuid}",
+                uptimeReport);
+
+            response.EnsureSuccessStatusCode();
+            
+            Log.Info("Successfully reported uptime to the management API.");
+        }
+        catch (Exception e)
+        {
+            Log.Warning("Failed to report uptime to the management API.");
+        }
     }
     
     /// <summary>
