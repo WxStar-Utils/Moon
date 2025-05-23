@@ -28,8 +28,15 @@ public class StarApi
         }
         catch (HttpRequestException e)
         {
-            Log.Error("The STAR API is not currently up.");
-            Log.Error("Contact system administrator when possible.");
+            if (Config.config.UseNationalLocations)
+            {
+                Log.Error("An error occurred while connecting to the WXStarManager API");
+                Log.Warning("National data enabled -- ignoring WXStarManager connect failure");
+                Log.Warning("Stats for national data will not be available.");
+                return;
+            }
+            
+            Log.Error("An error occurred while connecting to the WXStarManager API");
             throw;
         }
     }
