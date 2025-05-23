@@ -1,5 +1,5 @@
 ﻿using Moon;
-using Moon.API;
+using Moon.API.WXStarManager;
 using Moon.MQTT;
 using Moon.Tasks;
 
@@ -43,7 +43,7 @@ public class Program
             }
         }
 
-        await MistApi.Init();
+        await StarApi.Init();
         await MqttDistributor.Connect();
 
         await Task.Delay(1 * 1000);
@@ -76,8 +76,8 @@ public class Program
         }
         else
         {
-            await MistApi.GetActiveLocations();
-            locations = MistApi.Locations;
+            await StarApi.GetActiveLocations(StarModels.IntelliStar2);
+            locations = StarApi.Locations;
         }
         
         Log.Info("Initialization complete!");
