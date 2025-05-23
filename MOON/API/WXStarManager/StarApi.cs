@@ -16,19 +16,9 @@ public class StarApi
     /// </summary>
     public static async Task Init()
     {
-        try
-        {
-            var response = await Client.GetAsync(
-                $"{Config.config.StarApiEndpoint}");
+        bool isApiUp = await StarApiUp();
 
-            response.EnsureSuccessStatusCode();
-
-            await RegisterSystemService();
-            await SendUptimeReport();
-            
-            Log.Info("STAR API is up!");
-        }
-        catch (HttpRequestException e)
+        if (!isApiUp)
         {
             if (Config.config.UseNationalLocations)
             {
@@ -39,8 +29,11 @@ public class StarApi
             }
             
             Log.Error("An error occurred while connecting to the WXStarManager API");
-            throw;
+            return;
         }
+        
+        await RegisterSystemService();
+        await SendUptimeReport();
     }
 
 
