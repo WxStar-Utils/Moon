@@ -18,7 +18,7 @@ public class StarApi
     {
         bool isApiUp = await StarApiUp();
 
-        if (isApiUp)
+        if (!isApiUp)
         {
             if (Config.config.UseNationalLocations)
             {
@@ -96,6 +96,7 @@ public class StarApi
         try
         {
             var uptimeReport = new ServiceUptimeReport();
+            uptimeReport.UptimeTimestamp = DateTime.UtcNow;
             var serviceUuid = await File.ReadAllTextAsync("service-uuid");
 
             var response = await Client.PutAsJsonAsync(
