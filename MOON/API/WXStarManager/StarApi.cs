@@ -18,7 +18,7 @@ public class StarApi
     {
         bool isApiUp = await StarApiUp();
 
-        if (!isApiUp)
+        if (isApiUp)
         {
             if (Config.config.UseNationalLocations)
             {
@@ -29,7 +29,7 @@ public class StarApi
             }
             
             Log.Error("An error occurred while connecting to the WXStarManager API");
-            return;
+            throw new Exception("Unable to continue initialization.");
         }
         
         await RegisterSystemService();
