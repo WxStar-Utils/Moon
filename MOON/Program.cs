@@ -1,7 +1,8 @@
 ﻿using Moon;
-using Moon.API.WXStarManager;
+using Moon.API;
 using Moon.MQTT;
 using Moon.Tasks;
+using WxStarManager.Models;
 
 public class Program
 {
@@ -76,7 +77,7 @@ public class Program
         }
         else
         {
-            await StarApi.GetActiveLocations(StarModels.IntelliStar2);
+            await StarApi.GetActiveLocations(WxStarModel.IntelliStar2);
             locations = StarApi.Locations;
         }
         
