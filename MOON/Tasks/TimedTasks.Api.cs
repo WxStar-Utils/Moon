@@ -1,7 +1,6 @@
-using System.Reflection.Metadata.Ecma335;
-using Moon.API.WXStarManager;
+using Moon.API;
 using Moon.RecordGeneration;
-using Moon.Schema.System;
+using WxStarManager.Models;
 
 namespace Moon.Tasks;
 
@@ -21,7 +20,7 @@ public partial class TimedTasks
         {
             Log.Info("Refreshing locations cache.");
 
-            await StarApi.GetActiveLocations(StarModels.IntelliStar2);
+            await StarApi.GetActiveLocations(WxStarModel.IntelliStar2);
             await SendNewUnitData();
             await Task.Delay(300 * 1000);    // Checks every 5 minutes.
         }
