@@ -61,10 +61,9 @@ public static class StarApi
 
     public static async Task RegisterMoonService()
     {
-        string serviceUuid = await File.ReadAllTextAsync("service-uuid");
-
         try
-        {
+        { 
+            string serviceUuid = await File.ReadAllTextAsync("service-uuid");
             await _api.GetServiceInfo(serviceUuid);
 
             return;
@@ -73,6 +72,10 @@ public static class StarApi
         {
             Log.Debug("Potentially old registration.. Re-registering.");
             File.Delete("service-uuid");
+        }
+        catch (FileNotFoundException e)
+        {
+            Log.Debug("Registration file not found.");
         }
 
         SystemServiceIn serviceInfo = new SystemServiceIn();
