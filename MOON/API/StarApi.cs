@@ -29,7 +29,7 @@ public static class StarApi
             throw new Exception("Unable to continue initialization.");
         }
 
-        await RegisterMoonService();
+        //await RegisterMoonService();
     }
 
     public static async Task<string[]> GetActiveLocations(WxStarModel starModel)
