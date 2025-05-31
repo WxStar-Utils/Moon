@@ -3,7 +3,7 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>net6.0</TargetFramework>
-        <RootNamespace>MistWX_i2Me</RootNamespace>
+        <RootNamespace>Moon</RootNamespace>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
@@ -13,7 +13,7 @@
       <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="9.0.0" />
       <PackageReference Include="MQTTnet" Version="4.3.7.1207" />
       <PackageReference Include="Pastel" Version="6.0.1" />
-      <PackageReference Include="StarAPI.NET" Version="1.0.1" />
+      <PackageReference Include="StarAPI.NET" Version="1.0.0" />
       <PackageReference Include="System.Data.SQLite" Version="1.0.119" />
       <PackageReference Include="System.Text.Json" Version="9.0.0" />
     </ItemGroup>
