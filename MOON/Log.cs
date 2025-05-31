@@ -1,11 +1,15 @@
 using System.Drawing;
 using Pastel;
+using System.Diagnostics;
 
 namespace Moon;
 
 
 internal class Log
 {
+    private static string PROC_INFO =
+        $" - {Process.GetCurrentProcess().ProcessName}[{Process.GetCurrentProcess().Id}] - ";
+    
     private static string PREFIX_DEBUG = " [DEBUG] ";
     private static string PREFIX_ERROR = " [ERROR] ";
     private static string PREFIX_WARNING = " [WARN] ";
@@ -58,7 +62,7 @@ internal class Log
     public static void Error(string str)
     {
         if (LOG_LEVEL > LogLevel.Warning) return;
-        str = GetCurrentTime() + PREFIX_ERROR + str;
+        str = GetCurrentTime() + PROC_INFO + PREFIX_ERROR + str;
         Console.WriteLine(str.Pastel(COLOR_ERROR));
         WriteLogToFile(str);
     }
@@ -66,7 +70,7 @@ internal class Log
     public static void Warning(string str)
     {
         if (LOG_LEVEL > LogLevel.Warning) return;
-        str = GetCurrentTime() + PREFIX_WARNING + str;
+        str = GetCurrentTime() + PROC_INFO + PREFIX_WARNING + str;
         Console.WriteLine(str.Pastel(COLOR_WARNING));
         WriteLogToFile(str);
     }
@@ -74,7 +78,7 @@ internal class Log
     public static void Info(string str)
     {
         if (LOG_LEVEL > LogLevel.Info) return;
-        str = GetCurrentTime() + PREFIX_INFO + str;
+        str = GetCurrentTime() + PROC_INFO + PREFIX_INFO + str;
         Console.WriteLine(str.Pastel(COLOR_INFO));
         WriteLogToFile(str);
     }
