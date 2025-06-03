@@ -15,7 +15,7 @@ public class Config
 
     [XmlElement] public TwcApiKeysList TwcApiKeys { get; set; } = new();
     [XmlElement] public string StarApiEndpoint { get; set; } = "127.0.0.1:8000";
-    [XmlElement] public string StarApiToken { get; set; } = "REPLACE_ME";
+    // [XmlElement] public string StarApiToken { get; set; } = "REPLACE_ME";
     [XmlElement] public string LogLevel { get; set; } = "info";
     [XmlElement] public bool GetAlerts { get; set; } = true;
     

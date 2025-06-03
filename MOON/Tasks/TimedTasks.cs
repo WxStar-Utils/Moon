@@ -44,7 +44,7 @@ public partial class TimedTasks
             await MqttDistributor.PublishFile(
                 bulletinRecord, 
                 "storeData(QGROUP=__BERecord__,Feed=BERecord)",
-                "i2m/urgent");
+                "wxstar/data/i2/priority");
             
             Log.Debug("By this point, the record should be sent out.");
             
