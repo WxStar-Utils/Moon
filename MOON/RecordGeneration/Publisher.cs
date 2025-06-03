@@ -22,6 +22,7 @@ public static class Publisher
             List<GenericResponse<CurrentObservationsResponse>> obs =
                 await new CurrentObservationsProduct().Populate(locations);
             string obsRecord = await new CurrentObsRecord().MakeRecord(obs);
+            string obsRecordi1 = await IntelliStar.CurrentObsRecord.MakeRecord(obs);
             await MqttDistributor.PublishFile(obsRecord,
                 "storeData(QGROUP=__CurrentObservations__,Feed=CurrentObservations)",
                 mqttTopic);
