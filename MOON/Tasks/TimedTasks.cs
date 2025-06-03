@@ -99,10 +99,10 @@ public partial class TimedTasks
         switch (Config.config.UseNationalLocations)
         {
             case true:
-                mqttTopic = "i2m/national";
+                mqttTopic = "wxstar/data/i2/national";
                 break;
             case false:
-                mqttTopic = "i2m/global";
+                mqttTopic = "wxstar/data/i2";
                 break;
         }
 
