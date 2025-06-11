@@ -1,11 +1,11 @@
 [Unit]
-Description=Data aggregation server for WeatherSTAR units.
-After=wxnet-api.service
+Description=Data aggregation server for WeatherStar units
+After=starapi.service
 
 [Service]
-ExecStart=/usr/local/bin/moon
-User=mist
-Group=mist
+ExecStart=/bin/moon
+User=wxstar
+Group=wxstar
 
 [Install]
 WantedBy=multi-user.target
