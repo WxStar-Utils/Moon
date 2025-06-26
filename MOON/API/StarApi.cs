@@ -29,7 +29,6 @@ public static class StarApi
             throw new Exception("Unable to continue initialization.");
         }
 
-        //await RegisterMoonService();
     }
 
     public static async Task<string[]> GetActiveLocations(WxStarModel starModel)
@@ -38,64 +37,5 @@ public static class StarApi
         Locations = locations.ToArray();
 
         return Locations;
-    }
-
-    public static async Task SendUptimeReport()
-    {
-        try
-        {
-            SystemServiceReport report = new SystemServiceReport();
-            report.Online = true;
-        
-            await _api.ReportUptime(report, await File.ReadAllTextAsync("service-uuid"));
-            
-            Log.Info("Successfully reported uptime.");
-            // TODO : Add generated Moon json stats as a string and push it.
-        }
-        catch (Exception e)
-        {
-            Log.Warning("Failed to report uptime.");
-        }
-
-    }
-
-    public static async Task RegisterMoonService()
-    {
-        try
-        { 
-            string serviceUuid = await File.ReadAllTextAsync("service-uuid");
-            await _api.GetServiceInfo(serviceUuid);
-
-            return;
-        }
-        catch (HttpRequestException e)
-        {
-            Log.Debug("Potentially old registration.. Re-registering.");
-            File.Delete("service-uuid");
-        }
-        catch (FileNotFoundException e)
-        {
-            Log.Debug("Registration file not found.");
-        }
-
-        SystemServiceIn serviceInfo = new SystemServiceIn();
-
-        if (Config.config.UseNationalLocations)
-        {
-            serviceInfo.Name = "MOON-NAT";
-        }
-        else
-        {
-            serviceInfo.Name = "MOON";
-        }
-
-        serviceInfo.Host = Dns.GetHostEntry(Dns.GetHostName()).AddressList[0].ToString();
-        serviceInfo.ProcessId = System.Diagnostics.Process.GetCurrentProcess().Id;
-
-        string newServiceUuid = await _api.RegisterService(serviceInfo);
-
-        await File.WriteAllTextAsync("service-uuid", newServiceUuid.Trim('"'));
-        
-        Log.Info($"Registered as {serviceInfo.Name} with uuid {newServiceUuid}.");
     }
 }

@@ -52,17 +52,4 @@ public partial class TimedTasks
         
         Log.Info("Data has been sent out for all newly added locations.");
     }
-
-    /// <summary>
-    /// Sends out uptime notifications to the API.
-    /// </summary>
-    public static async Task SendUptimeNotifications()
-    {
-        while (true)
-        {
-            await StarApi.SendUptimeReport();
-
-            await Task.Delay(60 * 1000);
-        }
-    }
 }

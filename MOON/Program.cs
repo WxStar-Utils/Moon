@@ -88,17 +88,15 @@ public class Program
         Task recordGenTask = TimedTasks.HourlyRecordGenTask(locations);
         Task clearAlertsCache = TimedTasks.ClearExpiredAlerts();
         
-        // Mist API tasks
+        // StarAPI tasks
         Task refreshLocations = TimedTasks.UpdateLocations();
-        Task uptimeNotifications = TimedTasks.SendUptimeNotifications();
         
         
         await Task.WhenAll(
             checkAlerts, 
             recordGenTask, 
             clearAlertsCache,
-            refreshLocations,
-            uptimeNotifications);
+            refreshLocations);
 
     }
 }

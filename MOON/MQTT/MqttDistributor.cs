@@ -2,6 +2,7 @@ using System.Text.Json;
 using Moon.Schema;
 using MQTTnet;
 using MQTTnet.Client;
+using MQTTnet.Exceptions;
 
 namespace Moon.MQTT;
 
@@ -14,6 +15,7 @@ public class MqttDistributor
     private static string USERNAME = Config.config.Mqtt.Username;
     private static string PASSWORD = Config.config.Mqtt.Password;
     private static string CLIENT_ID = $"MOON_{Guid.NewGuid()}";
+    private static bool _disconnected = false;
 
     public static async Task Connect()
     {
@@ -27,6 +29,28 @@ public class MqttDistributor
             .WithCredentials(USERNAME, PASSWORD)
             .WithCleanSession()
             .Build();
+
+        Client.DisconnectedAsync += async e =>
+        {
+            _disconnected = true;
+            Log.Warning("Lost connection to the MQTT Broker. Attempting to re-connect...");
+
+            while (_disconnected)
+            {
+                Log.Debug("DISCONNECTED");
+                await Task.Delay(TimeSpan.FromSeconds(5));
+                try
+                {
+                    await Client.ConnectAsync(clientOptions, CancellationToken.None);
+                    Log.Info("Reconnected to broker successfully.");
+                    _disconnected = false;
+                }
+                catch (MqttCommunicationException)
+                {
+                    Log.Error("Failed to connect to broker. Will re-attempt in 5 seconds.");
+                }
+            }
+        };
 
 
         await Client.ConnectAsync(clientOptions, CancellationToken.None);
